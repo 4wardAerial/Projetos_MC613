@@ -1,6 +1,9 @@
+// Módulo conversor de binario 11 bits para 4 bcd
+// Entrada: 11 bits (0-10)
+// Saída: 16 bits representando 4 digitos bcd
 module bin11_to_bcd4(
-	input wire [10:0] bin,
-	output reg [15:0] bcd
+	input wire [10:0] bin,	// Entrada: numero de 11 bits
+	output reg [15:0] bcd	// Saida: numero de 16 bits (cada 4 representa um digito)
 );
 	integer i;
 	reg [10:0] x;
