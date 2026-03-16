@@ -1,0 +1,53 @@
+|bin11_to_bcd4_tb
+
+
+|bin11_to_bcd4_tb|bin11_to_bcd4:uut
+bin[0] => bcd[0].DATAIN
+bin[1] => LessThan12.IN8
+bin[1] => Add12.IN8
+bin[1] => acc.DATAA
+bin[2] => LessThan9.IN8
+bin[2] => Add9.IN8
+bin[2] => acc.DATAA
+bin[3] => LessThan7.IN8
+bin[3] => Add7.IN8
+bin[3] => acc.DATAA
+bin[4] => LessThan5.IN8
+bin[4] => Add5.IN8
+bin[4] => acc.DATAA
+bin[5] => LessThan3.IN8
+bin[5] => Add3.IN8
+bin[5] => acc.DATAA
+bin[6] => LessThan2.IN8
+bin[6] => Add2.IN8
+bin[6] => acc.DATAA
+bin[7] => LessThan1.IN8
+bin[7] => Add1.IN8
+bin[7] => acc.DATAA
+bin[8] => LessThan0.IN6
+bin[8] => Add0.IN6
+bin[8] => acc.DATAA
+bin[9] => LessThan0.IN5
+bin[9] => Add0.IN5
+bin[9] => acc.DATAA
+bin[10] => LessThan0.IN4
+bin[10] => Add0.IN4
+bin[10] => acc.DATAA
+bcd[0] <= bin[0].DB_MAX_OUTPUT_PORT_TYPE
+bcd[1] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[2] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[3] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[4] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[5] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[6] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[7] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[8] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[9] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[10] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[11] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[12] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[13] <= acc.DB_MAX_OUTPUT_PORT_TYPE
+bcd[14] <= <GND>
+bcd[15] <= <GND>
+
+
