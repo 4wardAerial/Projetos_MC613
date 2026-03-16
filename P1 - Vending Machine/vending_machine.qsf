@@ -895,6 +895,12 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id bin11_to_bcd
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME bin11_to_bcd4_tb -section_id bin11_to_bcd4_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE bin11_to_bcd4.v -section_id bin11_to_bcd4_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE bin11_to_bcd4_tb.v -section_id bin11_to_bcd4_tb
+<<<<<<< HEAD
+=======
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name VERILOG_FILE Pressure_button.v
+set_global_assignment -name VERILOG_FILE displayer.v
+>>>>>>> 2af9d3536fb469560248bf3eeb2a0508ff332f78
 set_global_assignment -name VERILOG_FILE product2price.v
 set_global_assignment -name VERILOG_FILE states.v
 set_global_assignment -name VERILOG_FILE bin2hex.v
@@ -902,4 +908,8 @@ set_global_assignment -name VERILOG_FILE vending_machine.v
 set_global_assignment -name VERILOG_FILE bin11_to_bcd4.v
 set_global_assignment -name VERILOG_FILE bin11_to_bcd4_tb.v
 set_global_assignment -name VERILOG_FILE payer.v
+<<<<<<< HEAD
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+=======
+set_global_assignment -name VERILOG_FILE displayer_td.v
+>>>>>>> 2af9d3536fb469560248bf3eeb2a0508ff332f78

@@ -24,3 +24,5 @@ always @(posedge clk) begin
         val_pago = 11'd0;
     end
 end    
+
+endmodule
