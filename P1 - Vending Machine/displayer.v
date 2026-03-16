@@ -23,6 +23,10 @@ always @(*) begin
 		LEDR[0] = 1'b0;
 		LEDR[1] = 1'b1;
 		PROD_VALUE_BIN = PROD_PRICE - PROD_VALUE;
+	end else begin	// Estado impossivel
+		LEDR[0] = 1'b0;
+		LEDR[0] = 1'b0;
+		PROD_VALUE_BIN = PROD_VALUE;
 	end
 end
 
