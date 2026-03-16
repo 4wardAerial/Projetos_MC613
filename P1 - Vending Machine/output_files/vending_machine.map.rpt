@@ -1,5 +1,5 @@
-Analysis & Elaboration report for vending_machine
-Mon Mar 16 13:42:50 2026
+Analysis & Synthesis report for vending_machine
+Mon Mar 16 15:14:03 2026
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -7,11 +7,17 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Analysis & Elaboration Summary
-  3. Parallel Compilation
-  4. Analysis & Elaboration Settings
-  5. Port Connectivity Checks: "bin11_to_bcd4:uut"
-  6. Analysis & Elaboration Messages
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Post-Synthesis Netlist Statistics for Top Partition
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
 
 
 
@@ -34,47 +40,36 @@ refer to the applicable agreement for further details.
 
 
 
-+-----------------------------------------------------------------------------+
-; Analysis & Elaboration Summary                                              ;
-+-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Mon Mar 16 13:42:50 2026       ;
-; Quartus Prime Version         ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
-; Revision Name                 ; vending_machine                             ;
-; Top-level Entity Name         ; bin11_to_bcd4_tb                            ;
-; Family                        ; Cyclone V                                   ;
-; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
-; Total registers               ; N/A until Partition Merge                   ;
-; Total pins                    ; N/A until Partition Merge                   ;
-; Total virtual pins            ; N/A until Partition Merge                   ;
-; Total block memory bits       ; N/A until Partition Merge                   ;
-; Total PLLs                    ; N/A until Partition Merge                   ;
-; Total DLLs                    ; N/A until Partition Merge                   ;
-+-------------------------------+---------------------------------------------+
-
-
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 6           ;
-; Maximum allowed            ; 6           ;
-;                            ;             ;
-; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-+----------------------------+-------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Mon Mar 16 15:14:03 2026       ;
+; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                   ; vending_machine                             ;
+; Top-level Entity Name           ; product2price                               ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 0                                           ;
+; Total pins                      ; 15                                          ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Elaboration Settings                                                                                           ;
+; Analysis & Synthesis Settings                                                                                             ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; bin11_to_bcd4_tb   ; vending_machine    ;
+; Top-level entity name                                                           ; product2price      ; vending_machine    ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
@@ -155,38 +150,141 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "bin11_to_bcd4:uut"                                                                  ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; bcd  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 20          ;
+; Maximum allowed            ; 14          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
 
 
-+---------------------------------+
-; Analysis & Elaboration Messages ;
-+---------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                         ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                           ; Library ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------+---------+
+; product2price.v                  ; yes             ; User Verilog HDL File  ; /home/f-ec2024/ra276617/Code/MC614/Projetos_MC613/P1 - Vending Machine/product2price.v ;         ;
++----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------+---------+
+
+
++------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                ;
++---------------------------------------------+--------------+
+; Resource                                    ; Usage        ;
++---------------------------------------------+--------------+
+; Estimate of Logic utilization (ALMs needed) ; 5            ;
+;                                             ;              ;
+; Combinational ALUT usage for logic          ; 10           ;
+;     -- 7 input functions                    ; 0            ;
+;     -- 6 input functions                    ; 0            ;
+;     -- 5 input functions                    ; 0            ;
+;     -- 4 input functions                    ; 10           ;
+;     -- <=3 input functions                  ; 0            ;
+;                                             ;              ;
+; Dedicated logic registers                   ; 0            ;
+;                                             ;              ;
+; I/O pins                                    ; 15           ;
+;                                             ;              ;
+; Total DSP Blocks                            ; 0            ;
+;                                             ;              ;
+; Maximum fan-out node                        ; BIN[2]~input ;
+; Maximum fan-out                             ; 10           ;
+; Total fan-out                               ; 65           ;
+; Average fan-out                             ; 1.62         ;
++---------------------------------------------+--------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                      ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+---------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name   ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+---------------+--------------+
+; |product2price             ; 10 (10)             ; 0 (0)                     ; 0                 ; 0          ; 15   ; 0            ; |product2price      ; product2price ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+---------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |product2price|PRICE       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_lcell_comb     ; 12                          ;
+;     normal            ; 12                          ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 1                           ;
+;         4 data inputs ; 10                          ;
+; boundary_port         ; 15                          ;
+;                       ;                             ;
+; Max LUT depth         ; 2.00                        ;
+; Average LUT depth     ; 1.31                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus Prime Analysis & Elaboration
+Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Mon Mar 16 13:42:43 2026
-Info: Command: quartus_map --read_settings_files=on --write_settings_files=off vending_machine -c vending_machine --analysis_and_elaboration
+    Info: Processing started: Mon Mar 16 15:13:57 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off vending_machine -c vending_machine
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
 Info (12021): Found 0 design units, including 0 entities, in source file vending_machine.v
 Info (12021): Found 1 design units, including 1 entities, in source file bin11_to_bcd4.v
-    Info (12023): Found entity 1: bin11_to_bcd4 File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4.v Line: 1
+    Info (12023): Found entity 1: bin11_to_bcd4 File: /home/f-ec2024/ra276617/Code/MC614/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4.v Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file bin11_to_bcd4_tb.v
-    Info (12023): Found entity 1: bin11_to_bcd4_tb File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 1
-Info (12127): Elaborating entity "bin11_to_bcd4_tb" for the top level hierarchy
-Info (10648): Verilog HDL Display System Task info at bin11_to_bcd4_tb.v(12): Inicio File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 12
-Info (10648): Verilog HDL Display System Task info at bin11_to_bcd4_tb.v(14): %4d = %1d %1d %1d %1d File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 14
-Warning (10175): Verilog HDL warning at bin11_to_bcd4_tb.v(15): ignoring unsupported system task File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 15
-Info (12128): Elaborating entity "bin11_to_bcd4" for hierarchy "bin11_to_bcd4:uut" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 9
-Warning (10230): Verilog HDL assignment warning at bin11_to_bcd4.v(16): truncated value with size 32 to match size of target (4) File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4.v Line: 16
-Warning (10230): Verilog HDL assignment warning at bin11_to_bcd4.v(18): truncated value with size 32 to match size of target (4) File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4.v Line: 18
-Warning (10230): Verilog HDL assignment warning at bin11_to_bcd4.v(20): truncated value with size 32 to match size of target (4) File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4.v Line: 20
+    Info (12023): Found entity 1: bin11_to_bcd4_tb File: /home/f-ec2024/ra276617/Code/MC614/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bin2hex.v
+    Info (12023): Found entity 1: bin2hex File: /home/f-ec2024/ra276617/Code/MC614/Projetos_MC613/P1 - Vending Machine/bin2hex.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file product2price.v
+    Info (12023): Found entity 1: product2price File: /home/f-ec2024/ra276617/Code/MC614/Projetos_MC613/P1 - Vending Machine/product2price.v Line: 4
+Info (12127): Elaborating entity "product2price" for the top level hierarchy
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "PRICE[10]" is stuck at GND File: /home/f-ec2024/ra276617/Code/MC614/Projetos_MC613/P1 - Vending Machine/product2price.v Line: 7
+Info (286030): Timing-Driven Synthesis is running
 Warning (20013): Ignored 571 assignments for entity "DE1_SoC" -- entity does not exist in design
     Warning (20014): Assignment for entity set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_ADDR[0] -entity DE1_SoC was ignored
     Warning (20014): Assignment for entity set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_ADDR[10] -entity DE1_SoC was ignored
@@ -759,10 +857,16 @@ Warning (20013): Ignored 571 assignments for entity "DE1_SoC" -- entity does not
     Warning (20014): Assignment for entity set_instance_assignment -name OUTPUT_TERMINATION "SERIES 50 OHM WITH CALIBRATION" -to HPS_DDR3_DQ[9] -entity DE1_SoC was ignored
     Warning (20014): Assignment for entity set_instance_assignment -name D5_DELAY 2 -to HPS_DDR3_CK_N -entity DE1_SoC was ignored
     Warning (20014): Assignment for entity set_instance_assignment -name D5_DELAY 2 -to HPS_DDR3_CK_P -entity DE1_SoC was ignored
-Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 577 warnings
-    Info: Peak virtual memory: 1463 megabytes
-    Info: Processing ended: Mon Mar 16 13:42:50 2026
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:16
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 25 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 11 output pins
+    Info (21061): Implemented 10 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 575 warnings
+    Info: Peak virtual memory: 1240 megabytes
+    Info: Processing ended: Mon Mar 16 15:14:03 2026
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:15
 
 

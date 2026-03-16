@@ -1,5 +1,5 @@
 Flow report for vending_machine
-Mon Mar 16 13:42:50 2026
+Mon Mar 16 15:14:23 2026
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -37,24 +37,29 @@ refer to the applicable agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Flow Summary                                                              ;
-+-----------------------------+---------------------------------------------+
-; Flow Status                 ; Successful - Mon Mar 16 13:42:50 2026       ;
-; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
-; Revision Name               ; vending_machine                             ;
-; Top-level Entity Name       ; bin11_to_bcd4_tb                            ;
-; Family                      ; Cyclone V                                   ;
-; Device                      ; 5CSEMA5F31C6                                ;
-; Timing Models               ; Final                                       ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Flow Summary                                                                  ;
++---------------------------------+---------------------------------------------+
+; Flow Status                     ; Successful - Mon Mar 16 15:14:23 2026       ;
+; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                   ; vending_machine                             ;
+; Top-level Entity Name           ; product2price                               ;
+; Family                          ; Cyclone V                                   ;
+; Device                          ; 5CSEMA5F31C6                                ;
+; Timing Models                   ; Final                                       ;
+; Logic utilization (in ALMs)     ; 6 / 32,070 ( < 1 % )                        ;
+; Total registers                 ; 0                                           ;
+; Total pins                      ; 15 / 457 ( 3 % )                            ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0 / 4,065,280 ( 0 % )                       ;
+; Total DSP Blocks                ; 0 / 87 ( 0 % )                              ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0 / 6 ( 0 % )                               ;
+; Total DLLs                      ; 0 / 4 ( 0 % )                               ;
++---------------------------------+---------------------------------------------+
 
 
 +-----------------------------------------+
@@ -62,67 +67,73 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/16/2026 13:42:43 ;
+; Start date & time ; 03/16/2026 15:13:57 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; vending_machine     ;
 +-------------------+---------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                                       ;
-+--------------------------------------+----------------------------------------+-----------------+------------------+-----------------------------------+
-; Assignment Name                      ; Value                                  ; Default Value   ; Entity Name      ; Section Id                        ;
-+--------------------------------------+----------------------------------------+-----------------+------------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 110073162002799.177367936312443        ; --              ; --               ; --                                ;
-; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --              ; --               ; bin11_to_bcd4_tb                  ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --               ; eda_board_design_timing           ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --               ; eda_board_design_boundary_scan    ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --               ; eda_board_design_signal_integrity ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --               ; eda_board_design_symbol           ;
-; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; bin11_to_bcd4_tb                       ; --              ; --               ; eda_simulation                    ;
-; EDA_OUTPUT_DATA_FORMAT               ; Verilog Hdl                            ; --              ; --               ; eda_simulation                    ;
-; EDA_SIMULATION_TOOL                  ; ModelSim-Altera (Verilog)              ; <None>          ; --               ; --                                ;
-; EDA_TEST_BENCH_ENABLE_STATUS         ; TEST_BENCH_MODE                        ; --              ; --               ; eda_simulation                    ;
-; EDA_TEST_BENCH_FILE                  ; bin11_to_bcd4.v                        ; --              ; --               ; bin11_to_bcd4_tb                  ;
-; EDA_TEST_BENCH_FILE                  ; bin11_to_bcd4_tb.v                     ; --              ; --               ; bin11_to_bcd4_tb                  ;
-; EDA_TEST_BENCH_MODULE_NAME           ; bin11_to_bcd4_tb                       ; --              ; --               ; bin11_to_bcd4_tb                  ;
-; EDA_TEST_BENCH_NAME                  ; bin11_to_bcd4_tb                       ; --              ; --               ; eda_simulation                    ;
-; EDA_TIME_SCALE                       ; 1 ps                                   ; --              ; --               ; eda_simulation                    ;
-; MAX_CORE_JUNCTION_TEMP               ; 85                                     ; --              ; --               ; --                                ;
-; MIN_CORE_JUNCTION_TEMP               ; 0                                      ; --              ; --               ; --                                ;
-; PARTITION_COLOR                      ; -- (Not supported for targeted family) ; --              ; bin11_to_bcd4_tb ; Top                               ;
-; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family) ; --              ; bin11_to_bcd4_tb ; Top                               ;
-; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family) ; --              ; bin11_to_bcd4_tb ; Top                               ;
-; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                    ; --              ; --               ; --                                ;
-; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --              ; --               ; --                                ;
-; PROJECT_OUTPUT_DIRECTORY             ; output_files                           ; --              ; --               ; --                                ;
-; TOP_LEVEL_ENTITY                     ; bin11_to_bcd4_tb                       ; vending_machine ; --               ; --                                ;
-+--------------------------------------+----------------------------------------+-----------------+------------------+-----------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                    ;
++--------------------------------------+----------------------------------------+-----------------+---------------+-----------------------------------+
+; Assignment Name                      ; Value                                  ; Default Value   ; Entity Name   ; Section Id                        ;
++--------------------------------------+----------------------------------------+-----------------+---------------+-----------------------------------+
+; COMPILER_SIGNATURE_ID                ; 93342210321389.177368483733560         ; --              ; --            ; --                                ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --              ; --            ; bin11_to_bcd4_tb                  ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --            ; eda_board_design_timing           ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --            ; eda_board_design_boundary_scan    ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --            ; eda_board_design_signal_integrity ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --              ; --            ; eda_board_design_symbol           ;
+; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; bin11_to_bcd4_tb                       ; --              ; --            ; eda_simulation                    ;
+; EDA_OUTPUT_DATA_FORMAT               ; Verilog Hdl                            ; --              ; --            ; eda_simulation                    ;
+; EDA_SIMULATION_TOOL                  ; ModelSim-Altera (Verilog)              ; <None>          ; --            ; --                                ;
+; EDA_TEST_BENCH_ENABLE_STATUS         ; TEST_BENCH_MODE                        ; --              ; --            ; eda_simulation                    ;
+; EDA_TEST_BENCH_FILE                  ; bin11_to_bcd4.v                        ; --              ; --            ; bin11_to_bcd4_tb                  ;
+; EDA_TEST_BENCH_FILE                  ; bin11_to_bcd4_tb.v                     ; --              ; --            ; bin11_to_bcd4_tb                  ;
+; EDA_TEST_BENCH_MODULE_NAME           ; bin11_to_bcd4_tb                       ; --              ; --            ; bin11_to_bcd4_tb                  ;
+; EDA_TEST_BENCH_NAME                  ; bin11_to_bcd4_tb                       ; --              ; --            ; eda_simulation                    ;
+; EDA_TIME_SCALE                       ; 1 ps                                   ; --              ; --            ; eda_simulation                    ;
+; MAX_CORE_JUNCTION_TEMP               ; 85                                     ; --              ; --            ; --                                ;
+; MIN_CORE_JUNCTION_TEMP               ; 0                                      ; --              ; --            ; --                                ;
+; PARTITION_COLOR                      ; -- (Not supported for targeted family) ; --              ; product2price ; Top                               ;
+; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family) ; --              ; product2price ; Top                               ;
+; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family) ; --              ; product2price ; Top                               ;
+; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                    ; --              ; --            ; --                                ;
+; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --              ; --            ; --                                ;
+; PROJECT_OUTPUT_DIRECTORY             ; output_files                           ; --              ; --            ; --                                ;
+; TOP_LEVEL_ENTITY                     ; product2price                          ; vending_machine ; --            ; --                                ;
++--------------------------------------+----------------------------------------+-----------------+---------------+-----------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Flow Elapsed Time                                                                                                          ;
-+------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Module Name            ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
-+------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Elaboration ; 00:00:07     ; 1.0                     ; 1463 MB             ; 00:00:16                           ;
-; Total                  ; 00:00:07     ; --                      ; --                  ; 00:00:16                           ;
-+------------------------+--------------+-------------------------+---------------------+------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                        ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis ; 00:00:05     ; 1.0                     ; 1225 MB             ; 00:00:15                           ;
+; Fitter               ; 00:00:15     ; 1.0                     ; 3289 MB             ; 00:00:49                           ;
+; Assembler            ; 00:00:04     ; 1.0                     ; 1174 MB             ; 00:00:04                           ;
+; Total                ; 00:00:24     ; --                      ; --                  ; 00:01:08                           ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                                 ;
-+------------------------+---------------------------+-------------+-------------+----------------+
-; Module Name            ; Machine Hostname          ; OS Name     ; OS Version  ; Processor type ;
-+------------------------+---------------------------+-------------+-------------+----------------+
-; Analysis & Elaboration ; ribeiro.lab.ic.unicamp.br ; Fedora Core ; Fedora Core ; x86_64         ;
-+------------------------+---------------------------+-------------+-------------+----------------+
++--------------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                            ;
++----------------------+------------------------+-------------+-------------+----------------+
+; Module Name          ; Machine Hostname       ; OS Name     ; OS Version  ; Processor type ;
++----------------------+------------------------+-------------+-------------+----------------+
+; Analysis & Synthesis ; dias.lab.ic.unicamp.br ; Fedora Core ; Fedora Core ; x86_64         ;
+; Fitter               ; dias.lab.ic.unicamp.br ; Fedora Core ; Fedora Core ; x86_64         ;
+; Assembler            ; dias.lab.ic.unicamp.br ; Fedora Core ; Fedora Core ; x86_64         ;
++----------------------+------------------------+-------------+-------------+----------------+
 
 
 ------------
 ; Flow Log ;
 ------------
-quartus_map --read_settings_files=on --write_settings_files=off vending_machine -c vending_machine --analysis_and_elaboration
+quartus_map --read_settings_files=on --write_settings_files=off vending_machine -c vending_machine
+quartus_fit --read_settings_files=off --write_settings_files=off vending_machine -c vending_machine
+quartus_asm --read_settings_files=off --write_settings_files=off vending_machine -c vending_machine
 
 
 
