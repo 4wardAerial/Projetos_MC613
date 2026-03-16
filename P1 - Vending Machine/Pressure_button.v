@@ -11,7 +11,7 @@ module pressure_button#(
 );
 	
 	localparam COUNTER_MAX = (CLK / 1000) * PRESSURE_TIME; // Para esperar 20 s
-	localparam COUNTER_WIDTH = $clog2$(CONTER_MAX + 1); // Equação para sabermos quantos bits o registrador tera. Log 2
+	localparam COUNTER_WIDTH = $clog2(COUNTER_MAX + 1); // Equação para sabermos quantos bits o registrador tera. Log 2
 	
 	reg [COUNTER_WIDTH - 1 : 0] cont;
 	reg button_sync_0 = 1'b0; // variavel responsável por ser o valor inicial do botão
@@ -26,14 +26,14 @@ module pressure_button#(
 	
 	always @(posedge clk) begin
 		if(button_sync_1 != button_out) begin
-			if(cont < CONT_MAX) begin
-				counter <= counter + 1'b';
+			if(cont < COUNTER_MAX) begin
+				cont <= cont + 1'b1;
 			end else begin
 				button_out <= button_sync_1;
-				counter <= 0;
+				cont <= 0;
 			end
 		end else begin
-			counter< 0;
+			cont <= 0;
 			
 			end
 		end
