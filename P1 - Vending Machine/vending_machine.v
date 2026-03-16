@@ -8,7 +8,7 @@ module vending_machine (
     output wire [6:0] HEX3,
     output wire [6:0] HEX5,
     output wire [1:0] LEDR,
-     reg [2:0] state,
+    reg [2:0] state,
     reg [10:0] val_prod,
     reg [10:0] val_pago
 );
@@ -16,10 +16,15 @@ module vending_machine (
 wire [0] is_key_0;
 wire [0] is_key_1;
 
-     key0checker is_key_0 (
+    keychecker is_key_0 (
+         .clk(clk),
+         .KEY(KEY[0])
+    )
+
+    keychecker is_key_1 (
           .clk(clk),
-          .KEY(KEY[0])
-     )
+          .KEY(KEY[1])
+    )
 
     products2price add_prod (
         .ID(SW[3:0]),
@@ -40,3 +45,4 @@ wire [0] is_key_1;
           .val_pag(val_pag),
           .STT(state)
     )
+
