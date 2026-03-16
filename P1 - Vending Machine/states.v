@@ -1,8 +1,9 @@
 module states(
-	input wire clk;
-	output reg current_product;
-	output reg current_shown_value;
-	
+	input wire clk,
+	output reg current_product,
+	output reg current_shown_value,
+	output reg produto_liberado,
+	output reg troco_devolucao
 );
 
 	reg [2:0] state
