@@ -7,42 +7,47 @@ module vending_machine (
     output wire [6:0] HEX2,
     output wire [6:0] HEX3,
     output wire [6:0] HEX5,
-    output wire [1:0] LEDR,
-    input reg [2:0] state,
-    input reg [10:0] val_prod,
-    input reg [10:0] val_pago
+    output wire [1:0] LEDR
 );
 
-wire [0] is_key_0;
-wire [0] is_key_1;
+wire is_key_0;
+wire is_key_1;
+wire [2:0] state;
+wire [10:0] val_prod;
+wire [10:0] val_pago;
 
-    keychecker key_0 (
-         .clk(clk),
-         .KEY(KEY[0])
-    )
+pressure_button key_0 (
+    .clk(clk),
+    .button_in(KEY[0]),
+    .button_out(is_key_0)
+);
 
-    keychecker key_1 (
-          .clk(clk),
-          .KEY(KEY[1])
-    )
+pressure_button key_1 (
+    .clk(clk),
+    .button_in(KEY[1]),
+    .button_out(is_key_1)
+);
 
-    products2price add_prod (
-        .ID(SW[3:0]),
-          .STT(state)
-    )
-    
-    payer find_val (
-        .AVAN(is_key_0),
-        .COIN(SW[9:4]),
-          .STT(state)
-    )
-    
-    states find_state (
-          .clk(clk)
-        .AVAN(is_key_0),
-        .CANC(is_key_1),
-          .val_prod(val_prod),
-          .val_pag(val_pag),
-          .STT(state)
-    )
+product2price add_prod (
+    .BIN(SW[3:0]),
+    .PROD_PRICE(val_prod)
+);
 
+payer find_val (
+    .clk(clk),
+    .advance(is_key_0),
+    .coin(SW[9:4]),
+    .state(state),
+    .val_pago(val_pago)
+);
+
+states find_state (
+    .clk(clk),
+    .advance(is_key_0),
+    .cancel(is_key_1),
+    .val_prod(val_prod),
+    .val_pag(val_pago),
+    .state(state)
+);
+
+endmodule

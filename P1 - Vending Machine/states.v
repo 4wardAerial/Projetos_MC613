@@ -9,28 +9,27 @@ module states(
 
 	reg [2:0] prev_state;
 	reg [2:0] next_state;
+
 	
-	c
-	
-	always(@posedge clk) begin
+	always@(posedge clk) begin
 		case(state)
 			3'b000: begin // A - seleçao do produto
 				if(advance)
-					next_state = 3'b'001
+					next_state = 3'b001;
 			end
-			3'b'001: begin // B - inserçao de dinheiro
+			3'b001: begin // B - inserçao de dinheiro
 				if(val_prod == val_pag)
-					next_state = 3b'010
+					next_state = 3'b010;
 				else if(val_prod < val_pag)
-					next_state = 3b'011
+					next_state = 3'b011;
 			end
-			3b'010: begin // C - Recebe sem troco
+			3'b010: begin // C - Recebe sem troco
 				
 			end
-			3b'011: begin // D - Recebe com troco
+			3'b011: begin // D - Recebe com troco
 			
 			end
-			3b'100: begin // E - Devolver dinheiro
+			3'b100: begin // E - Devolver dinheiro
 			
 			end	
 		endcase

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for vending_machine
-Mon Mar 16 16:55:29 2026
+Mon Mar 16 17:40:55 2026
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -10,7 +10,19 @@ Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Parameter Settings for User Entity Instance: pressure_button:key_0
+ 10. Parameter Settings for User Entity Instance: pressure_button:key_1
+ 11. Port Connectivity Checks: "states:find_state"
+ 12. Port Connectivity Checks: "payer:find_val"
+ 13. Port Connectivity Checks: "product2price:add_prod"
+ 14. Post-Synthesis Netlist Statistics for Top Partition
+ 15. Elapsed Time Per Partition
+ 16. Analysis & Synthesis Messages
+ 17. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -33,22 +45,27 @@ refer to the applicable agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                              ;
-+-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Mon Mar 16 16:55:29 2026           ;
-; Quartus Prime Version       ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
-; Revision Name               ; vending_machine                             ;
-; Top-level Entity Name       ; bin11_to_bcd4_tb                            ;
-; Family                      ; Cyclone V                                   ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Mon Mar 16 17:40:55 2026       ;
+; Quartus Prime Version           ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                   ; vending_machine                             ;
+; Top-level Entity Name           ; vending_machine                             ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 0                                           ;
+; Total pins                      ; 50                                          ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -57,7 +74,7 @@ refer to the applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
-; Top-level entity name                                                           ; bin11_to_bcd4_tb   ; vending_machine    ;
+; Top-level entity name                                                           ; vending_machine    ; vending_machine    ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
@@ -154,36 +171,257 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                          ;
++----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                            ; Library ;
++----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
+; states.v                         ; yes             ; User Verilog HDL File  ; /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/states.v          ;         ;
+; vending_machine.v                ; yes             ; User Verilog HDL File  ; /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v ;         ;
+; product2price.v                  ; yes             ; User Verilog HDL File  ; /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/product2price.v   ;         ;
+; pressure_button.v                ; yes             ; User Verilog HDL File  ; /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/pressure_button.v ;         ;
+; payer.v                          ; yes             ; User Verilog HDL File  ; /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/payer.v           ;         ;
++----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimate of Logic utilization (ALMs needed) ; 0     ;
+;                                             ;       ;
+; Combinational ALUT usage for logic          ; 0     ;
+;     -- 7 input functions                    ; 0     ;
+;     -- 6 input functions                    ; 0     ;
+;     -- 5 input functions                    ; 0     ;
+;     -- 4 input functions                    ; 0     ;
+;     -- <=3 input functions                  ; 0     ;
+;                                             ;       ;
+; Dedicated logic registers                   ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 50    ;
+;                                             ;       ;
+; Total DSP Blocks                            ; 0     ;
+;                                             ;       ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 1     ;
+; Total fan-out                               ; 50    ;
+; Average fan-out                             ; 0.50  ;
++---------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                        ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-----------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name     ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-----------------+--------------+
+; |vending_machine           ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 50   ; 0            ; |vending_machine    ; vending_machine ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: pressure_button:key_0 ;
++----------------+----------+----------------------------------------+
+; Parameter Name ; Value    ; Type                                   ;
++----------------+----------+----------------------------------------+
+; CLK            ; 50000000 ; Signed Integer                         ;
+; PRESSURE_TIME  ; 20       ; Signed Integer                         ;
++----------------+----------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: pressure_button:key_1 ;
++----------------+----------+----------------------------------------+
+; Parameter Name ; Value    ; Type                                   ;
++----------------+----------+----------------------------------------+
+; CLK            ; 50000000 ; Signed Integer                         ;
+; PRESSURE_TIME  ; 20       ; Signed Integer                         ;
++----------------+----------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "states:find_state"                                                                                                                                                                    ;
++----------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type  ; Severity ; Details                                                                                                                                                                            ;
++----------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; val_prod ; Input ; Warning  ; Input port expression (11 bits) is wider than the input port (1 bits) it drives.  The 10 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; val_pag  ; Input ; Warning  ; Input port expression (11 bits) is wider than the input port (1 bits) it drives.  The 10 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++----------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "payer:find_val"                                                                                ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port            ; Type   ; Severity ; Details                                                                             ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+; val_pago[10..1] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "product2price:add_prod"                                                                          ;
++-------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port              ; Type   ; Severity ; Details                                                                             ;
++-------------------+--------+----------+-------------------------------------------------------------------------------------+
+; PROD_PRICE[10..1] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_lcell_comb     ; 1                           ;
+;     normal            ; 1                           ;
+;         0 data inputs ; 1                           ;
+; boundary_port         ; 50                          ;
+;                       ;                             ;
+; Max LUT depth         ; 0.00                        ;
+; Average LUT depth     ; 0.00                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
-    Info: Processing started: Mon Mar 16 16:55:24 2026
+    Info: Processing started: Mon Mar 16 17:40:50 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off vending_machine -c vending_machine
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file states.v
+    Info (12023): Found entity 1: states File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/states.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file vending_machine.v
+    Info (12023): Found entity 1: vending_machine File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file product2price.v
-    Info (12023): Found entity 1: product2price File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/product2price.v Line: 4
-Error (10170): Verilog HDL syntax error at states.v(10) near text: "always";  expecting ";". Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/states.v Line: 10
-Info (12021): Found 0 design units, including 0 entities, in source file states.v
-Info (12021): Found 1 design units, including 1 entities, in source file bin2hex.v
-    Info (12023): Found entity 1: bin2hex File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/bin2hex.v Line: 4
-Error (10170): Verilog HDL syntax error at vending_machine.v(11) near text: "reg";  expecting a direction. Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 11
-Error (10149): Verilog HDL Declaration error at vending_machine.v(22): identifier "is_key_0" is already declared in the present scope File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 22
-Error (10170): Verilog HDL syntax error at vending_machine.v(24) near text: "keychecker";  expecting ";". Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 24
-Info (12021): Found 0 design units, including 0 entities, in source file vending_machine.v
-Info (12021): Found 1 design units, including 1 entities, in source file bin11_to_bcd4.v
-    Info (12023): Found entity 1: bin11_to_bcd4 File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4.v Line: 4
+    Info (12023): Found entity 1: product2price File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/product2price.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file pressure_button.v
+    Info (12023): Found entity 1: pressure_button File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/pressure_button.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file payer.v
+    Info (12023): Found entity 1: payer File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/payer.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file displayer.v
+    Info (12023): Found entity 1: displayer File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/displayer.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file count_1s.v
+    Info (12023): Found entity 1: cont_1s File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/count_1s.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file bin11_to_bcd4_tb.v
-    Info (12023): Found entity 1: bin11_to_bcd4_tb File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 1
-Error (10170): Verilog HDL syntax error at payer.v(9) near text: "always";  expecting ";". Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: /home/f-ec2024/ra281391/MC613/Projetos_MC613/P1 - Vending Machine/payer.v Line: 9
-Info (12021): Found 0 design units, including 0 entities, in source file payer.v
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 5 errors, 1 warning
-    Error: Peak virtual memory: 1144 megabytes
-    Error: Processing ended: Mon Mar 16 16:55:29 2026
-    Error: Elapsed time: 00:00:05
-    Error: Total CPU time (on all processors): 00:00:13
+    Info (12023): Found entity 1: bin11_to_bcd4_tb File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4_tb.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bin11_to_bcd4.v
+    Info (12023): Found entity 1: bin11_to_bcd4 File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin11_to_bcd4.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file bin2hex.v
+    Info (12023): Found entity 1: bin2hex File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/bin2hex.v Line: 4
+Info (12127): Elaborating entity "vending_machine" for the top level hierarchy
+Warning (10034): Output port "HEX0" at vending_machine.v(5) has no driver File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+Warning (10034): Output port "HEX1" at vending_machine.v(6) has no driver File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+Warning (10034): Output port "HEX2" at vending_machine.v(7) has no driver File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+Warning (10034): Output port "HEX3" at vending_machine.v(8) has no driver File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+Warning (10034): Output port "HEX5" at vending_machine.v(9) has no driver File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+Warning (10034): Output port "LEDR" at vending_machine.v(11) has no driver File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 11
+Info (12128): Elaborating entity "pressure_button" for hierarchy "pressure_button:key_0" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 23
+Info (12128): Elaborating entity "product2price" for hierarchy "product2price:add_prod" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 34
+Info (12128): Elaborating entity "payer" for hierarchy "payer:find_val" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 42
+Info (10264): Verilog HDL Case Statement information at payer.v(12): all case item expressions in this case statement are onehot File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/payer.v Line: 12
+Info (12128): Elaborating entity "states" for hierarchy "states:find_state" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 51
+Warning (10036): Verilog HDL or VHDL warning at states.v(10): object "prev_state" assigned a value but never read File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/states.v Line: 10
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "HEX0[0]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+    Warning (13410): Pin "HEX0[1]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+    Warning (13410): Pin "HEX0[2]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+    Warning (13410): Pin "HEX0[3]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+    Warning (13410): Pin "HEX0[4]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+    Warning (13410): Pin "HEX0[5]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+    Warning (13410): Pin "HEX0[6]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 5
+    Warning (13410): Pin "HEX1[0]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+    Warning (13410): Pin "HEX1[1]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+    Warning (13410): Pin "HEX1[2]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+    Warning (13410): Pin "HEX1[3]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+    Warning (13410): Pin "HEX1[4]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+    Warning (13410): Pin "HEX1[5]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+    Warning (13410): Pin "HEX1[6]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 6
+    Warning (13410): Pin "HEX2[0]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+    Warning (13410): Pin "HEX2[1]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+    Warning (13410): Pin "HEX2[2]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+    Warning (13410): Pin "HEX2[3]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+    Warning (13410): Pin "HEX2[4]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+    Warning (13410): Pin "HEX2[5]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+    Warning (13410): Pin "HEX2[6]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 7
+    Warning (13410): Pin "HEX3[0]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+    Warning (13410): Pin "HEX3[1]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+    Warning (13410): Pin "HEX3[2]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+    Warning (13410): Pin "HEX3[3]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+    Warning (13410): Pin "HEX3[4]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+    Warning (13410): Pin "HEX3[5]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+    Warning (13410): Pin "HEX3[6]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 8
+    Warning (13410): Pin "HEX5[0]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+    Warning (13410): Pin "HEX5[1]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+    Warning (13410): Pin "HEX5[2]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+    Warning (13410): Pin "HEX5[3]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+    Warning (13410): Pin "HEX5[4]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+    Warning (13410): Pin "HEX5[5]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+    Warning (13410): Pin "HEX5[6]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 9
+    Warning (13410): Pin "LEDR[0]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 11
+    Warning (13410): Pin "LEDR[1]" is stuck at GND File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 11
+Info (144001): Generated suppressed messages file /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/output_files/vending_machine.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 13 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "clk" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 2
+    Warning (15610): No output dependent on input pin "SW[0]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[1]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[2]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[3]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[4]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[5]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[6]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[7]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[8]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "SW[9]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 3
+    Warning (15610): No output dependent on input pin "KEY[0]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 4
+    Warning (15610): No output dependent on input pin "KEY[1]" File: /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/vending_machine.v Line: 4
+Info (21057): Implemented 50 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 13 input pins
+    Info (21059): Implemented 37 output pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 61 warnings
+    Info: Peak virtual memory: 1200 megabytes
+    Info: Processing ended: Mon Mar 16 17:40:55 2026
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:15
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in /home/f-ec2024/ra281289/Documents/Projetos_MC613/P1 - Vending Machine/output_files/vending_machine.map.smsg.
 
 

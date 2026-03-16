@@ -1,3 +1,2 @@
-*.qws
-*.qsf
-*.dbinfo
+*
+!*.v
