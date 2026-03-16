@@ -902,3 +902,4 @@ set_global_assignment -name VERILOG_FILE bin2hex.v
 set_global_assignment -name VERILOG_FILE vending_machine.v
 set_global_assignment -name VERILOG_FILE bin11_to_bcd4.v
 set_global_assignment -name VERILOG_FILE bin11_to_bcd4_tb.v
+set_global_assignment -name VERILOG_FILE payer.v
