@@ -1,2 +1,25 @@
-*
-!*.v
+# Arquivos gerados pelo Quartus
+*.qpf
+*.qsf
+*.qdf
+*.bak
+*.txt
+*.qws
+*.rpt
+*.sft
+*.sof
+*.pof
+*.summary
+*.jdi
+*.map
+*.cmp
+*.vho
+*.vo
+db/
+incremental_db/
+simulation/
+output_files/
+.qsys_edit/
+# Se usar ModelSim/Questa
+modelsim/
+vsim.wlf
