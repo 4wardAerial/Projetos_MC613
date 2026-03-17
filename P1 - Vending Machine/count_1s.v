@@ -1,4 +1,4 @@
-module cont_1s(
+module count_1s(
 	input clk,
 	input reset,
 	output reg sec_pulse

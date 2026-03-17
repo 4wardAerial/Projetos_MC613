@@ -6,11 +6,17 @@ module states(
 	input wire cancel,
 	output reg [2:0] state
 );
-
+	
+	reg reset_timer;
+	reg sec_pulse;
+	count_1s timer (
+		.clk(clk),
+		.reset(reset_timer),
+		.sec_pulse(sec_pulse)
+	);
 	reg [2:0] prev_state;
 	reg [2:0] next_state;
 
-	
 	always@(posedge clk) begin
 		case(state)
 			3'b000: begin // A - seleçao do produto
@@ -18,19 +24,32 @@ module states(
 					next_state = 3'b001;
 			end
 			3'b001: begin // B - inserçao de dinheiro
+				if(cancel && val_pag == 0)
+					next_state = 3'b000;
+				else if(cancel)
+					next_state = 3'b100;
 				if(val_prod == val_pag)
 					next_state = 3'b010;
 				else if(val_prod < val_pag)
 					next_state = 3'b011;
 			end
 			3'b010: begin // C - Recebe sem troco
-				
+				if(prev_state != 3'b010)
+					reset_timer = 1;
+				else if(sec_pulse == 1)
+					next_state = 3'b000;
 			end
 			3'b011: begin // D - Recebe com troco
-			
+				if(prev_state != 3'b011)
+					reset_timer = 1;
+				else if(sec_pulse == 1)
+					next_state = 3'b000;
 			end
 			3'b100: begin // E - Devolver dinheiro
-			
+				if(prev_state != 3'b100)
+					reset_timer = 1;
+				else if(sec_pulse == 1)
+					next_state = 3'b000;
 			end	
 		endcase
 		prev_state = state;
