@@ -1,5 +1,5 @@
 module vending_machine (
-    input wire clk,
+    input wire CLK_50,
     input wire [9:0] SW,
     input wire [1:0] KEY,
     output wire [6:0] HEX0,
