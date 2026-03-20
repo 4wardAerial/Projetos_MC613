@@ -17,13 +17,13 @@ wire [10:0] val_prod;
 wire [10:0] val_pago;
 
 pressure_button key_0 (
-    .clk(clk),
+    .clk(CLK_50),
     .button_in(KEY[0]),
     .button_out(is_key_0)
 );
 
 pressure_button key_1 (
-    .clk(clk),
+    .clk(CLK_50),
     .button_in(KEY[1]),
     .button_out(is_key_1)
 );
@@ -34,7 +34,7 @@ product2price add_prod (
 );
 
 payer find_val (
-    .clk(clk),
+    .clk(CLK_50),
     .advance(is_key_0),
     .coin(SW[9:4]),
     .state(state),
@@ -42,7 +42,7 @@ payer find_val (
 );
 
 states find_state (
-    .clk(clk),
+    .clk(CLK_50),
     .advance(is_key_0),
     .cancel(is_key_1),
     .val_prod(val_prod),
