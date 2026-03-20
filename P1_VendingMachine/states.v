@@ -29,7 +29,7 @@ module states(
 					next_state = 3'b000;
 				else if(cancel)
 					next_state = 3'b100;
-				if(val_prod == val_pag)
+				else if(val_prod == val_pag)
 					next_state = 3'b010;
 				else if(val_prod < val_pag)
 					next_state = 3'b011;

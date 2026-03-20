@@ -16,7 +16,7 @@ module count_1s(
 		sec_pulse <= 1'b0;
 		
 	end else begin
-		if(cont == 26'd9) begin
+		if(cont == 26'd50000000) begin
 			cont <=26'd0;
 			sec_pulse <= 1'b1;
 		end else begin
