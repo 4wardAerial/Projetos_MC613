@@ -31,6 +31,8 @@ pressure_button key_1 (
 );
 
 product2price add_prod (
+	 .clk(CLK_50),
+	 .state(state),
     .BIN(SW[3:0]),
     .PROD_PRICE(val_prod)
 );
