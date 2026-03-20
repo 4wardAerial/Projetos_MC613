@@ -10,6 +10,7 @@ module vending_machine_tb;
 	wire [6:0] hex5;
 	wire [1:0] ledr;
 	
+	integer i;
 	
 	
 	vending_machine uut (
@@ -26,8 +27,51 @@ module vending_machine_tb;
 	
 	always #5 clk = ~clk;
 	
+	task avancar;
+		begin
+			key[0] = 0;
+			#15;
+			key[0] = 1;
+			#15;
+		end
+	endtask
+	
+	task cancelar;
+		begin
+			key[1] = 0;
+			#15;
+			key[1] = 1;
+			#15;
+		end
+	endtask
+	
 	initial begin
 		$monitor("tempo = %0t | estado = %b", $time, uut.find_state.state);
+		#10
+	
+		for (i = 0; i < 4'b1111; i = i + 1) begin
+			sw[3:0] = i;
+			#10;
+		end
+		
+		sw[3:0] = 4'b0001;
+		#10;
+		
+		avancar;
+		
+		sw[9:4] = 6'b100000;
+		avancar;
+		sw[9:4] = 6'b010000;
+		avancar;
+		sw[9:4] = 6'b001000;
+		avancar;
+		sw[9:4] = 6'b000100;
+		avancar;
+		sw[9:4] = 6'b000010;
+		avancar;
+		sw[9:4] = 6'b000001;
+		avancar;
+		
 		#100;
 		$finish;
 	end

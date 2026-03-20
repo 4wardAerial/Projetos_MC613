@@ -7,7 +7,7 @@ module payer (
 );
 
 always @(posedge clk) begin
-    if (state == 3'b010) begin
+    if (state == 3'b001) begin
         if (advance) begin
             case(coin)
                 6'b100000: val_pago <= val_pago + 11'd200;
@@ -20,7 +20,7 @@ always @(posedge clk) begin
         end
     end
     
-    else if (state == 3'b001) begin
+    else if (state == 3'b000) begin
         val_pago <= 11'd0;
     end
 end    
