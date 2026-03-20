@@ -1,7 +1,0 @@
-module bin11_to_bcd4(
-	input wire [10:0] bin;
-	output wire [15:0] bcd;
-);
-
-always @()
-endmodule;

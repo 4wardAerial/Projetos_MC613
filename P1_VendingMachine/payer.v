@@ -3,7 +3,7 @@ module payer (
     input wire advance,
     input wire [9:4] coin,
     input wire [2:0] state,
-    output reg [10:0] val_pago
+    output reg [10:0] val_pago = 11'b0
 );
 
 always @(posedge clk) begin
@@ -20,7 +20,7 @@ always @(posedge clk) begin
         end
     end
     
-    if (state == 3'b001) begin
+    else if (state == 3'b001) begin
         val_pago <= 11'd0;
     end
 end    
