@@ -16,6 +16,7 @@ always @(posedge clk) begin
                 6'b000100: val_pago <= val_pago + 11'd25;
                 6'b000010: val_pago <= val_pago + 11'd10;
                 6'b000001: val_pago <= val_pago + 11'd5;
+					 default: val_pago <= val_pago;
             endcase
         end
     end

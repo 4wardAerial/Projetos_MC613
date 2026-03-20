@@ -14,6 +14,7 @@ wire is_key_0;
 wire is_key_1;
 wire [2:0] state;
 wire [10:0] val_prod;
+wire [3:0] code_num;
 wire [10:0] val_pago;
 wire [10:0] displayed_value;
 wire [15:0] bcd_displayed_value;
@@ -34,7 +35,8 @@ product2price add_prod (
 	 .clk(CLK_50),
 	 .state(state),
     .BIN(SW[3:0]),
-    .PROD_PRICE(val_prod)
+    .PROD_PRICE(val_prod),
+	 .PROD_NUM(code_num)
 );
 
 payer find_val (
@@ -88,7 +90,7 @@ bin2hex bin2hex_converter0 (
 );
 
 bin2hex bin2hex_product_code_converter (
-	.BIN(SW[3:0]),
+	.BIN(code_num),
 	.HEX(HEX5)
 );
 

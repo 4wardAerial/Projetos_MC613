@@ -2,7 +2,8 @@ module product2price (
     input wire clk,
     input wire [2:0] state,
     input wire [3:0] BIN,
-    output reg [10:0] PROD_PRICE
+    output reg [10:0] PROD_PRICE,
+	 output reg [3:0] PROD_NUM
 );
 
 always @(posedge clk) begin
@@ -24,6 +25,7 @@ always @(posedge clk) begin
                       (BIN == 4'b1110) ? 11'd525 :    // E
                       (BIN == 4'b1111) ? 11'd800 :    // F
                                          11'd000;     // Default: zero
+			PROD_NUM <= BIN; 
     end
 end
 

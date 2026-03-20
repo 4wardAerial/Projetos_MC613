@@ -22,7 +22,7 @@ always @(*) begin
 	end else if (state == 3'b100) begin // Estado E, devolve dinheiro
 		ledr[0] = 1'b0;
 		ledr[1] = 1'b1;
-		prod_value_bin = prod_price - val_pago;
+		prod_value_bin = val_pago;
 	end else begin	// Estado impossivel
 		ledr[0] = 1'b0;
 		ledr[0] = 1'b0;
