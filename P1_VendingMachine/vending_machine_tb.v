@@ -59,19 +59,19 @@ module vending_machine_tb;
 		
 		avancar;
 		
-		sw[9:4] = 6'b100000;
-		avancar;
-		sw[9:4] = 6'b010000;
-		avancar;
-		sw[9:4] = 6'b001000;
-		avancar;
-		sw[9:4] = 6'b000100;
+		sw[9:4] = 6'b000001;
 		avancar;
 		sw[9:4] = 6'b000010;
 		avancar;
-		sw[9:4] = 6'b000001;
+		sw[9:4] = 6'b000100;
 		avancar;
-		
+		sw[9:4] = 6'b001000;
+		avancar;
+		sw[9:4] = 6'b010000;
+		avancar;
+		sw[9:4] = 6'b100000;
+		avancar;
+
 		#100;
 		$finish;
 	end
