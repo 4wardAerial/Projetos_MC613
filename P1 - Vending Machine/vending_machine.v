@@ -15,6 +15,8 @@ wire is_key_1;
 wire [2:0] state;
 wire [10:0] val_prod;
 wire [10:0] val_pago;
+wire [10:0] displayed_value;
+wire [15:0] bcd_displayed_value;
 
 pressure_button key_0 (
     .clk(CLK_50),
@@ -49,5 +51,45 @@ states find_state (
     .val_pag(val_pago),
     .state(state)
 );
+
+displayer displayer (
+	.state(state),
+	.val_pago(val_pago),
+	.prod_price(val_prod),
+	.prod_value_bin(displayed_value),
+	.ledr(LEDR)
+);
+
+bin11_to_bcd4 bin11_to_bcd4_converter (
+	.bin(displayed_value),
+	.bcd(bcd_displayed_value)
+);
+
+bin2hex bin2hex_converter3 (
+	.BIN(bcd_displayed_value[15:12]),
+	.HEX(HEX3)
+);
+
+bin2hex bin2hex_converter2 (
+	.BIN(bcd_displayed_value[11:8]),
+	.HEX(HEX2)
+);
+
+bin2hex bin2hex_converter1 (
+	.BIN(bcd_displayed_value[7:4]),
+	.HEX(HEX1)
+);
+
+bin2hex bin2hex_converter0 (
+	.BIN(bcd_displayed_value[3:0]),
+	.HEX(HEX0)
+);
+
+bin2hex bin2hex_product_code_converter (
+	.BIN(SW[3:0]),
+	.HEX(HEX5)
+);
+
+
 
 endmodule
