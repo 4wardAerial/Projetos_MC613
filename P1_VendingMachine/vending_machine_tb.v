@@ -45,32 +45,64 @@ module vending_machine_tb;
 		end
 	endtask
 	
+	task testar_selecao;
+		begin
+			for (i = 0; i < 4'b1111; i = i + 1) begin
+				sw[3:0] = i;
+				#10;
+			end
+		end
+	endtask
+	
+	task testar_troco;
+		begin
+			sw[9:4] = 6'b000001;
+			avancar;
+			sw[9:4] = 6'b000010;
+			avancar;
+			sw[9:4] = 6'b000100;
+			avancar;
+			sw[9:4] = 6'b001000;
+			avancar;
+			sw[9:4] = 6'b010000;
+			avancar;
+			sw[9:4] = 6'b100000;
+			avancar;
+		end
+	endtask
+	
+	task testar_sem_troco;
+		begin
+			sw[9:4] = 6'b100000;
+			avancar;
+			sw[9:4] = 6'b010000;
+			avancar;
+		end
+	endtask
+	
+	task testar_cancelar;
+		begin
+			sw[9:4] = 6'b100000;
+			avancar;
+			
+			cancelar;
+		end
+	endtask
+	
+	//fazer task para testar quando mais um switch é ativado para o pagamento
+	//fazer um teste tentando mudar o código do produto no meio da compra
 	initial begin
 		$monitor("tempo = %0t | estado = %b", $time, uut.find_state.state);
 		#10
-	
-		for (i = 0; i < 4'b1111; i = i + 1) begin
-			sw[3:0] = i;
-			#10;
-		end
-		
 		sw[3:0] = 4'b0001;
 		#10;
-		
 		avancar;
 		
-		sw[9:4] = 6'b000001;
-		avancar;
-		sw[9:4] = 6'b000010;
-		avancar;
-		sw[9:4] = 6'b000100;
-		avancar;
-		sw[9:4] = 6'b001000;
-		avancar;
-		sw[9:4] = 6'b010000;
-		avancar;
-		sw[9:4] = 6'b100000;
-		avancar;
+		//cancelar;
+		//testar_selecao;
+		//testar_troco;
+		//testar_sem_troco;
+		testar_cancelar;
 
 		#100;
 		$finish;
