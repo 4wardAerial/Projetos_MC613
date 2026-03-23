@@ -5,6 +5,6 @@ add wave -position end  sim:/vending_machine_tb/sw
 add wave -position end  sim:/vending_machine_tb/key
 add wave -position end  sim:/vending_machine_tb/ledr
 add wave -position end  sim:/vending_machine_tb/uut/state
-add wave -position end  sim:/vending_machine_tb/uut/add_prod/PROD_NUM
-add wave -position end  sim:/vending_machine_tb/uut/displayer/prod_value_bin
+add wave -position end -radix hex  sim:/vending_machine_tb/uut/add_prod/PROD_NUM
+add wave -position end -radix dec  sim:/vending_machine_tb/uut/displayer/prod_value_bin
 run -all

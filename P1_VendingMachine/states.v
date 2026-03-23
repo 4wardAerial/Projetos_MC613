@@ -60,7 +60,10 @@ module states(
 					next_state = 3'b000;
 				end else
 					reset_timer = 0;
-			end	
+			end
+			default: begin
+				next_state = 3'b000;
+			end
 		endcase
 		prev_state = state;
 		state = next_state;
