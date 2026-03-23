@@ -1,4 +1,5 @@
 module displayer(
+	input wire clk,
 	input wire [2:0] state,
 	input wire [10:0] val_pago,
 	input wire [10:0] prod_price,
@@ -6,7 +7,7 @@ module displayer(
 	output reg [1:0] ledr	// Saida: 2 LEDs vermelhos da placa
 );
 
-always @(*) begin
+always @(posedge clk) begin
 	if (state == 3'b000 || state == 3'b001) begin	// Estado A ou B, nao finalizou compra
 		ledr[0] = 1'b0;
 		ledr[1] = 1'b0;
