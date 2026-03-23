@@ -1,11 +1,11 @@
-module bin11_to_bcd4_tb;
+module bin2hex_tb;
 	
-	reg  [10:0] test_input;
-	wire [15:0] test_output;
+	reg  [3:0] test_input;
+	wire [6:0] test_output;
 	
-	bin11_to_bcd4 uut (
+	bin2hex uut (
 		.bin(test_input),
-		.bcd(test_output)
+		.hex(test_output)
 	);
 	
 	integer i;
@@ -13,7 +13,7 @@ module bin11_to_bcd4_tb;
 		$display("Inicio");
 		for(i = 0; i <= 2047; i = i + 1) begin
 			test_input = i; #10;
-			$display("%4d = %1d %1d %1d %1d", test_input, test_output[15:12], test_output[11:8], test_output[7:4], test_output[3:0]); 
+			$display("%2d = %7b", test_input, test_output); 
 		end
 		$finish;
 	end 

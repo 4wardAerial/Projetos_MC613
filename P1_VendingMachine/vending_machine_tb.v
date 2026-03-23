@@ -80,7 +80,13 @@ module vending_machine_tb;
 		end
 	endtask
 	
-	task testar_cancelar;
+	task testar_cancelar_sem_troco;
+		begin
+			cancelar;
+		end
+	endtask
+	
+	task testar_cancelar_com_troco;
 		begin
 			sw[9:4] = 6'b100000;
 			avancar;
@@ -89,8 +95,20 @@ module vending_machine_tb;
 		end
 	endtask
 	
-	//fazer task para testar quando mais um switch é ativado para o pagamento
-	//fazer um teste tentando mudar o código do produto no meio da compra
+	task testar_mais_de_uma_moeda;
+		begin
+			sw[9:4] = 6'b011000;
+			avancar;
+		end
+	endtask
+		
+	task testar_mudar_selecao;
+		begin
+			sw[3:0] = 4'b0010;
+			avancar;
+		end
+	endtask
+
 	initial begin
 		$monitor("tempo = %0t | estado = %b", $time, uut.find_state.state);
 		#10
@@ -98,11 +116,13 @@ module vending_machine_tb;
 		#10;
 		avancar;
 		
-		//cancelar;
-		//testar_selecao;
+		testar_selecao;
 		//testar_troco;
 		//testar_sem_troco;
-		testar_cancelar;
+		//testar_cancelar_sem_troco;
+		//testar_cancelar_com_troco;
+		//testar_mais_de_uma_moeda;
+		//testar_mudar_selecao;
 
 		#100;
 		$finish;
