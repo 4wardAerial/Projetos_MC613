@@ -57,6 +57,7 @@ states find_state (
 );
 
 displayer displayer (
+	.clk(CLK_50),
 	.state(state),
 	.val_pago(val_pago),
 	.prod_price(val_prod),
