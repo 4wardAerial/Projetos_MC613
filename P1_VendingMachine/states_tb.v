@@ -18,19 +18,64 @@ module states_tb;
 	
 	always #5 clk = ~clk;
 	
+	task paga_com_troco;
+		begin
+			val_pag = 11'd400; #10;
+
+			$display("Apertei avança");
+			advance = 1'b1;
+			@(posedge clk)
+			advance = 1'b0;
+		end
+	endtask
+	
+	task paga_sem_troco;
+		begin
+			val_pag = 11'd350; #10;
+			
+			$display("Apertei avança");
+			advance = 1'b1;
+			@(posedge clk)
+			advance = 1'b0;
+		end
+	endtask
+	
+	task cancela_com_troco;
+		begin
+			val_pag = 11'd150; #10;
+		
+			$display("Apertei cancela");
+			cancel = 1'b1;
+			@(posedge clk)
+			cancel = 1'b0;
+		end
+	endtask
+	
+	task cancela_sem_troco;
+		begin
+			val_pag = 11'd0; #10;
+		
+			$display("Apertei cancela");
+			cancel = 1'b1;
+			@(posedge clk)
+			cancel = 1'b0;
+		end
+	endtask
+	
 	initial begin
 		$monitor("val_pag = %d, val_prod = %d, result_state = %d", val_pag, val_prod, result_state);
-		val_prod = 11'd345; #10;
+		val_prod = 11'd350; #10;
 		
 		$display("Apertei avança");
 		advance = 1'b1;
 		@(posedge clk)
 		advance = 1'b0;
 		
-		val_pag = 11'd300; #10;
-		val_pag = 11'd345; #10;
+		//paga_com_troco;
+		//paga_sem_troco;
+		//cancela_com_troco;
+		cancela_sem_troco;
 		#200;
-		
 		$finish;
 		
 	end
