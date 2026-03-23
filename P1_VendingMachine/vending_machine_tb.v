@@ -56,6 +56,9 @@ module vending_machine_tb;
 	
 	task testar_troco;
 		begin
+			sw[3:0] = 4'b0001;
+			#10;
+			avancar;
 			sw[9:4] = 6'b000001;
 			avancar;
 			sw[9:4] = 6'b000010;
@@ -73,6 +76,9 @@ module vending_machine_tb;
 	
 	task testar_sem_troco;
 		begin
+			sw[3:0] = 4'b0001;
+			#10;
+			avancar;
 			sw[9:4] = 6'b100000;
 			avancar;
 			sw[9:4] = 6'b010000;
@@ -82,12 +88,18 @@ module vending_machine_tb;
 	
 	task testar_cancelar_sem_troco;
 		begin
+			sw[3:0] = 4'b0010;
+			#10;
+			avancar;
 			cancelar;
 		end
 	endtask
 	
 	task testar_cancelar_com_troco;
 		begin
+			sw[3:0] = 4'b0001;
+			#10;
+			avancar;
 			sw[9:4] = 6'b100000;
 			avancar;
 			
@@ -97,6 +109,9 @@ module vending_machine_tb;
 	
 	task testar_mais_de_uma_moeda;
 		begin
+			sw[3:0] = 4'b0001;
+			#10;
+			avancar;
 			sw[9:4] = 6'b011000;
 			avancar;
 		end
@@ -104,6 +119,9 @@ module vending_machine_tb;
 		
 	task testar_mudar_selecao;
 		begin
+			sw[3:0] = 4'b0001;
+			#10;
+			avancar;
 			sw[3:0] = 4'b0010;
 			avancar;
 		end
@@ -112,9 +130,6 @@ module vending_machine_tb;
 	initial begin
 		$monitor("tempo = %0t | estado = %b", $time, uut.find_state.state);
 		#10
-		sw[3:0] = 4'b0001;
-		#10;
-		avancar;
 		
 		testar_selecao;
 		//testar_troco;
