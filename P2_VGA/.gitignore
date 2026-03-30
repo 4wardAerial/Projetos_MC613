@@ -22,4 +22,4 @@ output_files/
 .qsys_edit/
 # Se usar ModelSim/Questa
 modelsim/
-vsim.wlf
+vsim.wlf../P1 - Vending Machine/
