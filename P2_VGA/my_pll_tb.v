@@ -1,3 +1,29 @@
-//time_scale = 1ns/1ps
+`timescale 1ns/1ps 
 
-//module 
+module my_pll_tb(); 
+
+    reg clk = 1'b0; 
+	 reg rstn;
+    wire pll_clk_out_25mhz;
+    wire pll_clk_out_150mhz;
+
+
+    my_pll my_pll_inst(
+        .clk_in(clk),
+        .pll_clk_out_25mhz(pll_clk_out_25mhz),
+        .pll_clk_out_150mhz(pll_clk_out_150mhz)
+    );
+						
+   
+    initial begin
+        forever #10 clk = ~clk;
+    end
+
+   
+    initial begin 
+        rstn = 1'b0;
+        repeat(3) @(negedge clk);
+        rstn = 1'b1;
+    end
+    
+endmodule 
