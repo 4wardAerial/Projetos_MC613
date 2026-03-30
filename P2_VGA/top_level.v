@@ -8,10 +8,10 @@ my_pll pll (
 
 controlado_vga vga (
 	.pixel_clk(pixel_clk),
-	.reset_n(1),
-	.r_in(),
-	.g_in(),
-	.b_in(),
+	.reset_n(1'b1),
+	.r_in(8'd0),
+	.g_in(8'd0),
+	.b_in(8'd0),
 );
 
 endmodule
