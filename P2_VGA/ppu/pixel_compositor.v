@@ -21,3 +21,5 @@ module pixel_compositor (
             final_color = 8'h00; 
         end
     end
+
+endmodule

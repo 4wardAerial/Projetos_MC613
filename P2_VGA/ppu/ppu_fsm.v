@@ -36,3 +36,5 @@ module ppu_fsm (
             end
         end
     end
+
+endmodule
