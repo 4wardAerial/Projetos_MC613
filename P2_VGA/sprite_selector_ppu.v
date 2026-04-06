@@ -26,7 +26,7 @@ module sprite_selector (
                 4'b10_01: pixel_idx = 3'b100;
                 4'b10_10: pixel_idx = 3'b100;
                 default:  pixel_idx = 3'b000;
-            endcaseolor <= 24'h000000
+            endcase
         end else begin
             if (ID == 1'b0) begin
                 case ({tile_x, tile_y})
@@ -64,7 +64,7 @@ module sprite_selector (
             color <= 24'h000000; 
         end else begin
             case (pixel_idx)
-                3'b000: transparente <= 1'b1;;
+                3'b000: transparente <= 1'b1;
                 3'b001: color <= 24'hfbc336; 
                 3'b010: color <= 24'h000000; 
                 3'b011: color <= 24'hffffff;
