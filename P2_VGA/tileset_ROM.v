@@ -6,4 +6,4 @@ module bg_ROM (
 reg [24:0] mem [0:2] = [6'hfbc336, 6'h000000, 6'hffffff];
 
 assign data_out = mem[id-1];
-end
+endmodule
