@@ -3,9 +3,9 @@ module sprite_selector (
     input wire rst_n,
     input wire estado_olhos,
     input wire ID,
-    input wire [1:0] tile_x, // Needs 2 bits to count 0, 1, 2
-    input wire [1:0] tile_y, // Needs 2 bits to count 0, 1, 2
-    output reg [23:0] color,  // 24 bits to hold standard RGB hex values
+    input wire [1:0] tile_x, 
+    input wire [1:0] tile_y, 
+    output reg [23:0] color,  
     output reg [0:0] transparente
 );
 
