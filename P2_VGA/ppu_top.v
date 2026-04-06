@@ -1,6 +1,6 @@
 module ppu_top(
 	input wire clk,
-	input wire [1:0] SW
+	input wire [1:0] SW,
 	input wire pixel_x,
 	input wire pixel_y,
 	input wire video_active,
