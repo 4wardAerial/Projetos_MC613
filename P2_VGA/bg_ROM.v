@@ -11,4 +11,4 @@ initial begin
 end
 
 assign data_out = mem[linha][coluna];
-end
+endmodule

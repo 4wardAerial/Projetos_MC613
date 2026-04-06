@@ -14,7 +14,7 @@ wire pixel_clk;
 wire [9:0] pixel_x;
 wire [9:0] pixel_y;
 wire video_active;
-wire [7:0]final_color
+wire [7:0]final_color;
 
 my_pll pll (
 	.clk_in(CLOCK_50),

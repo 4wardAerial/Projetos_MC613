@@ -2,7 +2,7 @@ module find_background_pixel(
 	input wire [9:0] pixel_x,
 	input wire [9:0] pixel_y,
 	output wire [23:0] bg_color
-)
+);
 
 wire [3:0] linha_bg;
 wire [3:0] coluna_bg;
@@ -20,6 +20,6 @@ bg_ROM rom_bg(
 tileset_ROM rom_tileset(
 	.id(id),
 	.data_out(bg_color)
-)
+);
 
-tileset_ROM rom_tileset(
+endmodule
