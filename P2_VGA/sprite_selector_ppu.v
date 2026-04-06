@@ -1,67 +1,76 @@
-begin module sprite_selector (
-        input wire clk,
-        input wire rst_n,
-        input wire [0] estado_olhos,
-        input wire [0] ID,
-        input wire [0] tile_x,
-        input wire [0] tile_y,
-        output reg [5:0] color
-    );
+module sprite_selector (
+    input wire clk,
+    input wire rst_n,
+    input wire estado_olhos,
+    input wire ID,
+    input wire [1:0] tile_x, // Needs 2 bits to count 0, 1, 2
+    input wire [1:0] tile_y, // Needs 2 bits to count 0, 1, 2
+    output reg [23:0] color,  // 24 bits to hold standard RGB hex values
+    output reg [0:0] transparente
+);
 
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            if (estado_olhos == 1'b0) begin
-                sprite <= eye_open;
+    reg [2:0] pixel_idx;
+
+    always @(*) begin
+        pixel_idx = 3'b000;
+
+        if (estado_olhos == 1'b0) begin
+            case ({tile_x, tile_y})
+                4'b00_00: pixel_idx = 3'b100;
+                4'b00_01: pixel_idx = 3'b100;
+                4'b00_10: pixel_idx = 3'b100;
+                4'b01_00: pixel_idx = 3'b100;
+                4'b01_01: pixel_idx = 3'b100;
+                4'b01_10: pixel_idx = 3'b010;
+                4'b10_00: pixel_idx = 3'b100;
+                4'b10_01: pixel_idx = 3'b100;
+                4'b10_10: pixel_idx = 3'b100;
+                default:  pixel_idx = 3'b000;
+            endcaseolor <= 24'h000000
+        end else begin
+            if (ID == 1'b0) begin
+                case ({tile_x, tile_y})
+                    4'b00_00: pixel_idx = 3'b010;
+                    4'b00_01: pixel_idx = 3'b000;
+                    4'b00_10: pixel_idx = 3'b000;
+                    4'b01_00: pixel_idx = 3'b000;
+                    4'b01_01: pixel_idx = 3'b010;
+                    4'b01_10: pixel_idx = 3'b000;
+                    4'b10_00: pixel_idx = 3'b010;
+                    4'b10_01: pixel_idx = 3'b000;
+                    4'b10_10: pixel_idx = 3'b000;
+                    default:  pixel_idx = 3'b000;
+                endcase
             end else begin
-                case (ID)
-                    1'b0: sprite <= left_eye_closed;
-                    1'b1: sprite <= right_eye_closed;
-                    default: sprite <= left_eye_closed;
+                case ({tile_x, tile_y})
+                    4'b00_00: pixel_idx = 3'b000;
+                    4'b00_01: pixel_idx = 3'b000;
+                    4'b00_10: pixel_idx = 3'b010;
+                    4'b01_00: pixel_idx = 3'b000;
+                    4'b01_01: pixel_idx = 3'b010;
+                    4'b01_10: pixel_idx = 3'b000;
+                    4'b10_00: pixel_idx = 3'b000;
+                    4'b10_01: pixel_idx = 3'b000;
+                    4'b10_10: pixel_idx = 3'b010;
+                    default:  pixel_idx = 3'b000;
                 endcase
             end
-
-            color = sprite[tile[tile_x][tile_y]];
         end
     end
 
-    left_eye_closed begin
-        tile[0][0] <= 3'b010;
-        tile[0][1] <= 3'b000;
-        tile[0][2] <= 3'b000;
-        tile[1][0] <= 3'b000;
-        tile[1][1] <= 3'b010;
-        tile[1][2] <= 3'b000;
-        tile[2][0] <= 3'b010;
-        tile[2][1] <= 3'b000;
-        tile[2][2] <= 3'b000;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            color <= 24'h000000; 
+        end else begin
+            case (pixel_idx)
+                3'b000: transparente <= 1'b1;;
+                3'b001: color <= 24'hfbc336; 
+                3'b010: color <= 24'h000000; 
+                3'b011: color <= 24'hffffff;
+                default: color <= 24'h000000;
+            endcase
+        end
     end
 
-    eye_open begin
-        tile[0][0] <= 3'b100;
-        tile[0][1] <= 3'b100;
-        tile[0][2] <= 3'b100;
-        tile[1][0] <= 3'b100;
-        tile[1][1] <= 3'b100;
-        tile[1][2] <= 3'b010;
-        tile[2][0] <= 3'b100;
-        tile[2][1] <= 3'b100;
-        tile[2][2] <= 3'b100;
-    end
-
-    right_eye_closed begin
-        tile[0][0] <= 3'b000;
-        tile[0][1] <= 3'b000;
-        tile[0][2] <= 3'b010;
-        tile[1][0] <= 3'b000;
-        tile[1][1] <= 3'b010;
-        tile[1][2] <= 3'b000;
-        tile[2][0] <= 3'b000;
-        tile[2][1] <= 3'b000;
-        tile[2][2] <= 3'b000;
-    end
-
-    tile_map begin
-        color[1] <= 6'hffff00;
-        color[2] <= 6'h000000;
-        color[3] <= 6'hffffff;
-    end
+endmodule
