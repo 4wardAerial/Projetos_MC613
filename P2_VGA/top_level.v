@@ -14,7 +14,7 @@ wire pixel_clk;
 wire [9:0] pixel_x;
 wire [9:0] pixel_y;
 wire video_active;
-wire [7:0]final_color;
+wire [23:0]final_color;
 
 my_pll pll (
 	.clk_in(CLOCK_50),
@@ -36,9 +36,9 @@ controlador_vga vga (
 	 .pixel_x(pixel_x),
 	 .pixel_y(pixel_y),
 	 .video_active(video_active),
-    .r_in(8'h89),
-    .g_in(8'hd8),
-    .b_in(8'h08),
+    .r_in(final_color[23:16]),
+    .g_in(final_color[15:8]),
+    .b_in(final_color[7:0]),
     .VGA_R(VGA_R),
     .VGA_G(VGA_G),
     .VGA_B(VGA_B),

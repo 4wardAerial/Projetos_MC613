@@ -4,11 +4,11 @@ module bg_ROM (
 	output wire [3:0] data_out
 );
 
-reg [3:0] mem [0:15][0:15];
+reg [3:0] mem [0:255];
 
 initial begin
 	$readmemh("bckg.txt", mem);
 end
 
-assign data_out = mem[linha][coluna];
+assign data_out = mem[linha*16+coluna];
 endmodule
