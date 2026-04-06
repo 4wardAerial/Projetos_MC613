@@ -8,7 +8,9 @@ module find_sprites (
         output reg [1:0] tile_y
     );
 
-
+    reg [5:0] sprite [0:1]; 
+	integer i;
+	 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             for (i = 0; i < 2; i = i + 1) begin
@@ -25,9 +27,10 @@ module find_sprites (
     end
 
             
-    sprite_map begin
-        sprite[0] <= 6'h040533;
-        sprite[1] <= 6'h090533; # tile 09, tile 05, size 3x3 tiles
+    initial
+	 begin
+        sprite[0] = 6'h040533;
+        sprite[1] = 6'h090533; //tile 09, tile 05, size 3x3 tiles
     end
 
 endmodule
