@@ -3,9 +3,9 @@ module find_sprites (
         input wire rst_n,
         input wire [8:0] pixel_x,
         input wire [8:0] pixel_y,
-        output reg [0] ID,
-        output reg [0] tile_x,
-        output reg [0] tile_y
+        output reg [0:0] ID,
+        output reg [1:0] tile_x,
+        output reg [1:0] tile_y
     );
 
 
