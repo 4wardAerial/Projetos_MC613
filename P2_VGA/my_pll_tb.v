@@ -5,13 +5,12 @@ module my_pll_tb();
     reg clk = 1'b0; 
 	 reg rstn;
     wire pll_clk_out_25mhz;
-    wire pll_clk_out_150mhz;
 
 
     my_pll my_pll_inst(
         .clk_in(clk),
         .pll_clk_out_25mhz(pll_clk_out_25mhz),
-        .pll_clk_out_150mhz(pll_clk_out_150mhz)
+		  .rstn(rstn)
     );
 						
    

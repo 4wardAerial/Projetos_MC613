@@ -11,6 +11,10 @@ module top_level(
 );
 
 wire pixel_clk;
+wire [9:0] pixel_x;
+wire [9:0] pixel_y;
+wire video_active;
+wire [7:0]final_color
 
 my_pll pll (
 	.clk_in(CLOCK_50),
@@ -18,12 +22,23 @@ my_pll pll (
 	.pll_clk_out_25mhz(pixel_clk)
 );
 
+ppu_top ppu (
+	.clk(pixel_clk),
+	.rst_n(1'd1),
+	.pixel_x(pixel_x),
+	.pixel_y(pixel_y),
+	.final_color(final_color)
+);
+
 controlador_vga vga (
     .pixel_clk(pixel_clk),
     .reset_n(1'b1),
-    .r_in(8'h00),
-    .g_in(8'hff),
-    .b_in(8'h00),
+	 .pixel_x(pixel_x),
+	 .pixel_y(pixel_y),
+	 .video_active(video_active),
+    .r_in(8'h89),
+    .g_in(8'hd8),
+    .b_in(8'h08),
     .VGA_R(VGA_R),
     .VGA_G(VGA_G),
     .VGA_B(VGA_B),
