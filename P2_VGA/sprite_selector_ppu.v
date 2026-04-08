@@ -59,16 +59,22 @@ module sprite_selector (
     end
 
 
-    always @(posedge clk or negedge rst_n) begin
+always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            color <= 24'h000000; 
+            color <= 24'h000000;
+            transparente <= 1'b1;
         end else begin
+            transparente <= 1'b0; 
+
             case (pixel_idx)
                 3'b000: transparente <= 1'b1;
                 3'b001: color <= 24'hfbc336; 
                 3'b010: color <= 24'h000000; 
                 3'b011: color <= 24'hffffff;
-                default: color <= 24'h000000;
+                default: begin 
+                    color <= 24'h000000;
+                    transparente <= 1'b1;
+                end
             endcase
         end
     end
