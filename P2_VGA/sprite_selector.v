@@ -7,15 +7,13 @@ module sprite_selector (
     input wire [1:0] tile_x, 
     input wire [1:0] tile_y, 
     output reg [23:0] color,  
-    output reg [0:0] transparent
+    output reg transparent
 );
 
     reg [2:0] pixel_idx;
 
     always @(*) begin
-        pixel_idx = 3'b000;
-
-        if (is_there_sprite != 1'b0) begin
+        if (is_there_sprite) begin
             if (estado_olhos == 1'b0) begin
                 case ({tile_x, tile_y})
                     4'b00_00: pixel_idx = 3'b011;
@@ -58,8 +56,10 @@ module sprite_selector (
                     endcase
                 end
             end
-        end
-    end
+        end else begin
+				pixel_idx = 3'b000;
+		  end
+    end  
 
 
 always @(posedge clk or negedge rst_n) begin
