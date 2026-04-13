@@ -12,9 +12,9 @@ module find_sprites (
 	 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            ID <= 4;
-            tile_x <= 4;
-            tile_y <= 4;
+            ID <= 2;
+            tile_x <= 2;
+            tile_y <= 2;
         end else begin
             if (pixel_x >= (sprite[0][23:16] * 8) && 
                 pixel_x <  ((sprite[0][23:16] + sprite[0][7:4]) * 8) &&
@@ -35,9 +35,9 @@ module find_sprites (
                 tile_y <= (pixel_y - (sprite[1][15:8] * 8)) / 8;
                 
             end else begin
-                ID <= 4;
-                tile_x <= 4;
-                tile_y <= 4;
+                ID <= 2;
+                tile_x <= 2;
+                tile_y <= 2;
             end
         end
     end

@@ -2,7 +2,7 @@ module sprite_selector (
     input wire clk,
     input wire rst_n,
     input wire estado_olhos,
-    input wire ID,
+    input wire [1:0] ID,
     input wire [1:0] tile_x, 
     input wire [1:0] tile_y, 
     output reg [23:0] color,  
@@ -14,7 +14,7 @@ module sprite_selector (
     always @(*) begin
         pixel_idx = 3'b000;
 
-        if (ID == 1'b11) begin
+        if (ID == 2'b10) begin
             pixel_idx = 3'b000;
         end else begin
             if (estado_olhos == 1'b0) begin
@@ -31,7 +31,7 @@ module sprite_selector (
                     default:  pixel_idx = 3'b000;
                 endcase
             end else begin
-                if (ID == 1'b0) begin
+                if (ID == 2'b00) begin
                     case ({tile_x, tile_y})
                         4'b00_00: pixel_idx = 3'b010;
                         4'b00_01: pixel_idx = 3'b000;
