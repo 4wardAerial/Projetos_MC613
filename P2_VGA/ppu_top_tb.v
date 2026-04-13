@@ -28,7 +28,7 @@ module ppu_top_tb;
     initial begin
         clk = 0;
         rst_n = 0; 
-        SW = 2'b00;
+        estado_olhos = 2'b00;
         pixel_x = 10'd0;
         pixel_y = 10'd0;
         video_active = 1'b1;
@@ -46,9 +46,9 @@ module ppu_top_tb;
         pixel_x = 10'd35; 
         pixel_y = 10'd42;
 
-        // Teste de alteração de estado (SW[0])
+        // Teste de alteração de estado (estado_olhos[0])
         #40;
-        SW = 2'b01; // estado_olhos = 1
+        estado_olhos = 2'b01; // estado_olhos = 1
 
         // Teste do Sprite 1 
         #40;

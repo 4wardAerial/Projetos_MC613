@@ -1,6 +1,6 @@
 module ppu_top(
 	input wire clk,
-	input wire [1:0] SW,
+	input wire [1:0] estado_olhos,
 	input wire [9:0] pixel_x,
 	input wire [9:0] pixel_y, 
 	input wire video_active,
@@ -15,8 +15,6 @@ wire [1:0] tile_x;
 wire [1:0] tile_y;
 wire transparent; 
 wire is_there_sprite;
-
-wire estado_olhos = SW[0]; 
 
 layer_selector layer (
 	.bckg_color(bckg_color),
