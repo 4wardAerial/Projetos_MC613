@@ -13,14 +13,14 @@ wire [23:0] sprite_color;
 wire ID;
 wire [1:0] tile_x;
 wire [1:0] tile_y;
-wire transparente; 
+wire transparent; 
 
 wire estado_olhos = SW[0]; 
 
 layer_selector layer (
 	.bckg_color(bckg_color),
 	.sprite_color(sprite_color),
-	.transparent(transparente), 
+	.transparent(transparent), 
 	.layer_color(final_color)
 );
 
@@ -48,7 +48,7 @@ sprite_selector spr_sel (
     .tile_x(tile_x),
     .tile_y(tile_y),
     .color(sprite_color),
-    .transparente(transparente)
+    .transparent(transparent)
 );
 
 endmodule
