@@ -8,14 +8,14 @@ wire [3:0] linha_bg;
 wire [3:0] coluna_bg;
 wire [3:0] id;
 
-assign linha_bg  = pixel_x / 8;
-assign coluna_bg = pixel_y / 8;
-
+assign linha_bg = pixel_y / 8;
+assign coluna_bg = pixel_x / 8;
 bg_ROM rom_bg(
 	.linha(linha_bg),
 	.coluna(coluna_bg),
 	.data_out(id)
 );
+
 
 tileset_ROM rom_tileset(
 	.id(id),
