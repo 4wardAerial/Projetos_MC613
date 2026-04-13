@@ -1,6 +1,6 @@
 module top_level(
     input wire CLOCK_50,
-	 input wire [1:0] SW,
+	input wire [1:0] SW,
     output wire [7:0] VGA_R,
     output wire [7:0] VGA_G,
     output wire [7:0] VGA_B,
