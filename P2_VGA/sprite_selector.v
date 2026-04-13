@@ -6,7 +6,7 @@ module sprite_selector (
     input wire [1:0] tile_x, 
     input wire [1:0] tile_y, 
     output reg [23:0] color,  
-    output reg [0:0] transparente
+    output reg [0:0] transparent
 );
 
     reg [2:0] pixel_idx;
@@ -66,18 +66,18 @@ module sprite_selector (
 always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             color <= 24'h000000;
-            transparente <= 1'b1;
+            transparent <= 1'b1;
         end else begin
-            transparente <= 1'b0; 
+            transparent <= 1'b0; 
 
             case (pixel_idx)
-                3'b000: transparente <= 1'b1;
+                3'b000: transparent <= 1'b1;
                 3'b001: color <= 24'hfbc336; 
                 3'b010: color <= 24'h000000; 
                 3'b011: color <= 24'hffffff;
                 default: begin 
                     color <= 24'h000000;
-                    transparente <= 1'b1;
+                    transparent <= 1'b1;
                 end
             endcase
         end
