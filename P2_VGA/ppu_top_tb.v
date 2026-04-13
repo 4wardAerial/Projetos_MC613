@@ -2,7 +2,7 @@
 module ppu_top_tb;
 
     reg clk;
-    reg [1:0] SW;
+    reg [1:0] estado_olhos;
     reg [9:0] pixel_x;
     reg [9:0] pixel_y;
     reg video_active;
@@ -13,7 +13,7 @@ module ppu_top_tb;
  
     ppu_top uut (
         .clk(clk),
-        .SW(SW),
+        .estado_olhos(estado_olhos),
         .pixel_x(pixel_x),
         .pixel_y(pixel_y),
         .video_active(video_active),
