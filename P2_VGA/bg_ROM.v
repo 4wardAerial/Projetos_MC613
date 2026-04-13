@@ -10,5 +10,5 @@ initial begin
 	$readmemh("bckg.txt", mem);
 end
 
-assign data_out = mem[linha*16+coluna];
+assign data_out = linha*16+coluna <= 255 ? mem[linha*16+coluna] : 24'h000000;
 endmodule

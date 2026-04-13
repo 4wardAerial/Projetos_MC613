@@ -12,7 +12,7 @@ module controlador_vga(
 	output wire [9:0] pixel_x,
 	output wire [9:0] pixel_y,
 	output wire video_active,
-	A minha imagem de fundo está se repetindo várias vezes na teal quando era para aparecer apenas uma vez
+	//A minha imagem de fundo está se repetindo várias vezes na teal quando era para aparecer apenas uma vez
 	// Saidas fisicas
 	output wire [7:0] VGA_R,	// Intensidade vermelho
 	output wire [7:0] VGA_G,	// Intensidade verde
