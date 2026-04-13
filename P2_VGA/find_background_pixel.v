@@ -9,8 +9,8 @@ wire [3:0] coluna_bg;
 wire [3:0] id;
 wire [23:0] rom_color;
 
-assign linha_bg = pixel_y / 8;
-assign coluna_bg = pixel_x / 8;
+assign linha_bg = pixel_y / 8 - 22;
+assign coluna_bg = pixel_x / 8 - 32;
 
 bg_ROM rom_bg(
 	.linha(linha_bg),
@@ -23,6 +23,6 @@ tileset_ROM rom_tileset(
 	.data_out(rom_color)
 );
 
-assign bg_color = (pixel_x < 128 && pixel_y < 128)? rom_color : 24'h000000;
+assign bg_color = (pixel_x > 256 && pixel_y > 176 && pixel_x < 384 && pixel_y < 304)? rom_color : 24'h000000;
 
 endmodule

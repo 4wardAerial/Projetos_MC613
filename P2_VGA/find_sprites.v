@@ -44,9 +44,10 @@ module find_sprites (
             end
         end
     end
+	
 
-    initial begin
-        sprite[0] = 24'h040533; 
-        sprite[1] = 24'h090533; 
-    end
+	initial begin
+	  sprite[0] = 24'h241b33; 
+	  sprite[1] = 24'h291b33; 
+	end
 endmodule
