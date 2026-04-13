@@ -1,5 +1,5 @@
 module tileset_ROM_tb;
-	reg id = 0;
+	reg [3:0] id = 0;
 	wire [23:0] cor;
 	tileset_ROM uut(
 		.id(id),
@@ -13,5 +13,6 @@ module tileset_ROM_tb;
 		# 10;
 		id = 3;
 		# 10;
+		$finish;
 	end
 endmodule

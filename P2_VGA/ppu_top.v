@@ -20,7 +20,7 @@ wire estado_olhos = SW[0];
 layer_selector layer (
 	.bckg_color(bckg_color),
 	.sprite_color(sprite_color),
-	.transparent(transparent), 
+	.transparent(1'b1), 
 	.layer_color(final_color)
 );
 
