@@ -20,8 +20,8 @@ module sprite_selector (
                     4'b00_01: pixel_idx = 3'b011;
                     4'b00_10: pixel_idx = 3'b011;
                     4'b01_00: pixel_idx = 3'b011;
-                    4'b01_01: pixel_idx = 3'b011;
-                    4'b01_10: pixel_idx = 3'b010;
+                    4'b01_01: pixel_idx = 3'b010;
+                    4'b01_10: pixel_idx = 3'b011;
                     4'b10_00: pixel_idx = 3'b011;
                     4'b10_01: pixel_idx = 3'b011;
                     4'b10_10: pixel_idx = 3'b011;
