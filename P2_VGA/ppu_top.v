@@ -14,6 +14,7 @@ wire ID;
 wire [1:0] tile_x;
 wire [1:0] tile_y;
 wire transparent; 
+wire is_there_sprite;
 
 wire estado_olhos = SW[0]; 
 
@@ -35,6 +36,7 @@ find_sprites find_spr (
 	.rst_n(rst_n),
 	.pixel_x(pixel_x),
 	.pixel_y(pixel_y),
+	.is_there_sprite(is_there_sprite),
 	.ID(ID),
 	.tile_x(tile_x),
 	.tile_y(tile_y)
@@ -44,6 +46,7 @@ sprite_selector spr_sel (
     .clk(clk),
     .rst_n(rst_n),
     .estado_olhos(estado_olhos),
+	 .is_there_sprite(is_there_sprite),
     .ID(ID),
     .tile_x(tile_x),
     .tile_y(tile_y),

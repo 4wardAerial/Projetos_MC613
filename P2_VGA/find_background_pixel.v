@@ -1,7 +1,7 @@
 module find_background_pixel(
 	input wire [9:0] pixel_x,
 	input wire [9:0] pixel_y,
-	output wire [23:0] bg_color,
+	output wire [23:0] bg_color
 );
 
 wire [3:0] linha_bg;
@@ -23,6 +23,6 @@ tileset_ROM rom_tileset(
 	.data_out(rom_color)
 );
 
-bg_color = (pixel_x < 128 && pixel_y < 128)? rom_color : 24'h000000;
+assign bg_color = (pixel_x < 128 && pixel_y < 128)? rom_color : 24'h000000;
 
 endmodule
