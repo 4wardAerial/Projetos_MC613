@@ -46,7 +46,7 @@ sprite_selector spr_sel (
     .clk(clk),
     .rst_n(rst_n),
     .estado_olhos(estado_olhos),
-	 .is_there_sprite(is_there_sprite),
+	.is_there_sprite(is_there_sprite),
     .ID(ID),
     .tile_x(tile_x),
     .tile_y(tile_y),
