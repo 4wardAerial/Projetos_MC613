@@ -22,7 +22,14 @@ module find_sprites (
                 pixel_y <  ((sprite[0][15:8] + sprite[0][3:0]) * 8)) begin
                 
                 ID <= 0;
-                tile_x <= (pixel_x - (sprite[0][23:16] * 8)) / 8;
+                tile_x <= (pixel_x - (sprite[0][23:16] * 8)) / 8    
+                    4'b00_00: pixel_idx = 3'b011;
+                    4'b00_01: pixel_idx = 3'b011;
+                    4'b00_10: pixel_idx = 3'b011;
+                    4'b01_00: pixel_idx = 3'b011;
+                    4'b01_01: pixel_idx = 3'b011;
+                    4'b01_10: pixel_idx = 3'b010;
+                    4'b10_00: pixel_ 8;
                 tile_y <= (pixel_y - (sprite[0][15:8] * 8)) / 8;
 
             end else if (pixel_x >= (sprite[1][23:16] * 8) && 

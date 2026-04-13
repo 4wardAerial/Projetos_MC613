@@ -14,9 +14,7 @@ module sprite_selector (
     always @(*) begin
         pixel_idx = 3'b000;
 
-        if (ID == 2'b10) begin
-            pixel_idx = 3'b000;
-        end else begin
+        if (ID != 2'b10) begin
             if (estado_olhos == 1'b0) begin
                 case ({tile_x, tile_y})
                     4'b00_00: pixel_idx = 3'b011;
