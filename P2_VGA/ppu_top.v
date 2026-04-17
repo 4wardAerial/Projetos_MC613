@@ -1,6 +1,7 @@
 module ppu_top(
 	input wire clk,
 	input wire [1:0] estado_olhos,
+	input wire estado_lingua,
 	input wire [9:0] pixel_x,
 	input wire [9:0] pixel_y, 
 	input wire video_active,
@@ -10,7 +11,7 @@ module ppu_top(
 
 wire [23:0] bckg_color;
 wire [23:0] sprite_color;
-wire ID;
+wire [1:0] ID;
 wire [1:0] tile_x;
 wire [1:0] tile_y;
 wire transparent; 
@@ -44,6 +45,7 @@ sprite_selector spr_sel (
     .clk(clk),
     .rst_n(rst_n),
     .estado_olhos(estado_olhos),
+	 .estado_lingua(estado_lingua),
 	.is_there_sprite(is_there_sprite),
     .ID(ID),
     .tile_x(tile_x),

@@ -4,12 +4,12 @@ module find_sprites (
     input wire [9:0] pixel_x,
     input wire [9:0] pixel_y,
     output reg is_there_sprite,
-    output reg ID,
+    output reg [1:0] ID,
     output reg [1:0] tile_x,
     output reg [1:0] tile_y
 );
 
-    reg [23:0] sprite [0:1]; 
+    reg [23:0] sprite [0:2]; 
 	 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
@@ -23,7 +23,7 @@ module find_sprites (
                 pixel_y <  ((sprite[0][15:8] + sprite[0][3:0]) * 8)) begin
                 
                 is_there_sprite <= 1'b1;
-                ID <= 0;
+                ID <= 2'd0;
                 tile_x <= (pixel_x - (sprite[0][23:16] * 8)) / 8;
                 tile_y <= (pixel_y - (sprite[0][15:8] * 8)) / 8;
 
@@ -33,9 +33,19 @@ module find_sprites (
                          pixel_y <  ((sprite[1][15:8] + sprite[1][3:0]) * 8)) begin
                 
                 is_there_sprite <= 1'b1;
-                ID <= 1;
+                ID <= 2'd1;
                 tile_x <= (pixel_x - (sprite[1][23:16] * 8)) / 8;
                 tile_y <= (pixel_y - (sprite[1][15:8] * 8)) / 8;
+                
+            end else if (pixel_x >= (sprite[2][23:16] * 8) && 
+                         pixel_x <  ((sprite[2][23:16] + sprite[2][7:4]) * 8) &&
+                         pixel_y >= (sprite[2][15:8] * 8) && 
+                         pixel_y <  ((sprite[2][15:8] + sprite[2][3:0]) * 8)) begin
+                
+                is_there_sprite <= 1'b1;
+                ID <= 2'd2;
+                tile_x <= (pixel_x - (sprite[2][23:16] * 8)) / 8;
+                tile_y <= (pixel_y - (sprite[2][15:8] * 8)) / 8;
                 
             end else begin
                 is_there_sprite <= 0;
@@ -47,7 +57,8 @@ module find_sprites (
 	
 
 	initial begin
-	  sprite[0] = 24'h241b33; 
-	  sprite[1] = 24'h291b33; 
+		sprite[0] = 24'h241b33; 
+		sprite[1] = 24'h291b33; 
+		sprite[2] = 24'h282223; 
 	end
 endmodule

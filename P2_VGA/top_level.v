@@ -1,14 +1,15 @@
 module top_level(
-    input wire CLOCK_50,
+	input wire CLOCK_50,
 	input wire [1:0] SW,
-    output wire [7:0] VGA_R,
-    output wire [7:0] VGA_G,
-    output wire [7:0] VGA_B,
-    output wire VGA_HS,
-    output wire VGA_VS,
-    output wire VGA_BLANK_N,
-	 output wire VGA_SYNC_N,
-    output wire VGA_CLK
+	input wire [3:0]KEY,
+	output wire [7:0] VGA_R,
+	output wire [7:0] VGA_G,
+	output wire [7:0] VGA_B,
+	output wire VGA_HS,
+	output wire VGA_VS,
+	output wire VGA_BLANK_N,
+	output wire VGA_SYNC_N,
+	output wire VGA_CLK
 );
 
 wire pixel_clk;
@@ -26,6 +27,7 @@ my_pll pll (
 ppu_top ppu (
 	.clk(pixel_clk),
 	.estado_olhos(SW[1:0]),
+	.estado_lingua(KEY[0]),
 	.rst_n(1'd1),
 	.pixel_x(pixel_x),
 	.pixel_y(pixel_y),
