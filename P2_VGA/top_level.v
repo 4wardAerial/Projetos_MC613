@@ -20,7 +20,7 @@ wire [23:0]final_color;
 
 my_pll pll (
 	.refclk(CLOCK_50),
-	.rst(1),
+	.rst(0),
 	.outclk_0(pixel_clk)
 );
 
