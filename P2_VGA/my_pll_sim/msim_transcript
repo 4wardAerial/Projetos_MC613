@@ -18,153 +18,175 @@
 ###### MIF file copy and HDL compilation commands for IPUTF cores 
 # 
 # 
-# vlog "/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/pll_ip_sim/pll_ip.vo"
-# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:29 on Apr 24,2026
-# vlog -reportprogress 300 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/pll_ip_sim/pll_ip.vo 
-# -- Compiling module pll_ip
-# 
-# Top level modules:
-# 	pll_ip
-# End time: 11:11:29 on Apr 24,2026, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
 # vlog "/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim/my_pll.vo"
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:29 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim/my_pll.vo 
 # -- Compiling module my_pll
 # 
 # Top level modules:
 # 	my_pll
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:01
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
+# vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll.vo}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:31:18 on Apr 24,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll.vo 
+# -- Compiling module my_pll
+# 
+# Top level modules:
+# 	my_pll
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel_tb.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:31:18 on Apr 24,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel_tb.v 
+# -- Compiling module find_background_pixel_tb
+# 
+# Top level modules:
+# 	find_background_pixel_tb
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v 
 # -- Compiling module tileset_ROM
 # 
 # Top level modules:
 # 	tileset_ROM
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/top_level.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/top_level.v 
 # -- Compiling module top_level
 # 
 # Top level modules:
 # 	top_level
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/sprite_selector.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/sprite_selector.v 
 # -- Compiling module sprite_selector
 # 
 # Top level modules:
 # 	sprite_selector
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v 
 # -- Compiling module find_background_pixel
 # 
 # Top level modules:
 # 	find_background_pixel
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/controlador_vga.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/controlador_vga.v 
 # -- Compiling module controlador_vga
 # 
 # Top level modules:
 # 	controlador_vga
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/ppu_top.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/ppu_top.v 
 # -- Compiling module ppu_top
 # 
 # Top level modules:
 # 	ppu_top
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_sprites.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_sprites.v 
 # -- Compiling module find_sprites
 # 
 # Top level modules:
 # 	find_sprites
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v 
 # -- Compiling module layer_selector
 # 
 # Top level modules:
 # 	layer_selector
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_tb.v}
-# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_tb.v 
-# -- Compiling module my_pll_tb
-# 
-# Top level modules:
-# 	my_pll_tb
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v 
 # -- Compiling module bg_ROM
 # 
 # Top level modules:
 # 	bg_ROM
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
+# vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:31:18 on Apr 24,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v 
+# -- Compiling module bg_ROM
+# 
+# Top level modules:
+# 	bg_ROM
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 # vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
+# Start time: 12:31:18 on Apr 24,2026
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v 
 # -- Compiling module tileset_ROM
 # 
 # Top level modules:
 # 	tileset_ROM
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v}
+# vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 11:11:30 on Apr 24,2026
-# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v 
-# -- Compiling module tileset_ROM_tb
+# Start time: 12:31:18 on Apr 24,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v 
+# -- Compiling module find_background_pixel
 # 
 # Top level modules:
-# 	tileset_ROM_tb
-# End time: 11:11:30 on Apr 24,2026, Elapsed time: 0:00:00
+# 	find_background_pixel
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel_tb.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 12:31:18 on Apr 24,2026
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA" /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel_tb.v 
+# -- Compiling module find_background_pixel_tb
+# 
+# Top level modules:
+# 	find_background_pixel_tb
+# End time: 12:31:18 on Apr 24,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  tileset_ROM_tb
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" tileset_ROM_tb 
-# Start time: 11:11:30 on Apr 24,2026
-# Loading work.tileset_ROM_tb
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  find_background_pixel_tb
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" find_background_pixel_tb 
+# Start time: 12:31:18 on Apr 24,2026
+# Loading work.find_background_pixel_tb
+# Loading work.find_background_pixel
+# Loading work.bg_ROM
 # Loading work.tileset_ROM
 # 
 # add wave *
@@ -174,9 +196,13 @@
 # .main_pane.objects.interior.cs.body.tree
 # run -all
 # ** Warning: (vsim-3116) Problem reading symbols from linux-gate.so.1 : can not open ELF file.
-# ** Note: $finish    : /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v(16)
-#    Time: 30 ps  Iteration: 0  Instance: /tileset_ROM_tb
+# Tempo: 0 | X: x | Y: x | Bg color: xxxxxx
+# Tempo: 10 | X: 50 | Y: 50 | Bg color: 000000
+# Tempo: 20 | X: 300 | Y: 200 | Bg color: fbc336
+# Tempo: 30 | X: 290 | Y: 262 | Bg color: 000000
+# ** Note: $finish    : /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel_tb.v(34)
+#    Time: 40 ps  Iteration: 0  Instance: /find_background_pixel_tb
 # 1
-# Break in Module tileset_ROM_tb at /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v line 16
-# End time: 11:11:36 on Apr 24,2026, Elapsed time: 0:00:06
+# Break in Module find_background_pixel_tb at /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel_tb.v line 34
+# End time: 12:34:09 on Apr 24,2026, Elapsed time: 0:02:51
 # Errors: 0, Warnings: 1

@@ -19,9 +19,9 @@ wire video_active;
 wire [23:0]final_color;
 
 my_pll pll (
-	.clk_in(CLOCK_50),
-	.rstn(1),
-	.pll_clk_out_25mhz(pixel_clk)
+	.refclk(CLOCK_50),
+	.rst(1),
+	.outclk_0(pixel_clk)
 );
 
 ppu_top ppu (

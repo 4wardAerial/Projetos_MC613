@@ -28,8 +28,6 @@ vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos
 vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v}
 vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v}
 
-vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v}
-vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v}
 vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v}
 vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel_tb.v}
 

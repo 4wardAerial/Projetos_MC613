@@ -6,9 +6,9 @@ module controlador_vga_tb();
 	reg [7:0] g_in;
 	reg [7:0] b_in;
 
-	wire [9:0] pixel_x;
-	wire [9:0] pixel_y;
-	wire video_active;
+	reg [9:0] pixel_x;
+	reg [9:0] pixel_y;
+	reg video_active;
 
 	wire [7:0] VGA_R;
 	wire [7:0] VGA_G;

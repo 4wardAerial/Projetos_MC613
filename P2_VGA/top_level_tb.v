@@ -1,21 +1,19 @@
-'timescale 1ns/1ps
-
-module top_level_tb
+module top_level_tb();
     wire CLOCK_50;
     
-    wire [1:0] SW;
-    wire [7:0] VGA_R;
-    wire [7:0] VGA_G;
-    wire [7:0] VGA_B;
-    wire VGA_HS;
-    wire VGA_VS;
-    wire VGA_BLANK_N;
+	wire [1:0] SW;
+	wire [7:0] VGA_R;
+	wire [7:0] VGA_G;
+	wire [7:0] VGA_B;
+	wire VGA_HS;
+	wire VGA_VS;
+	wire VGA_BLANK_N;
 	wire VGA_SYNC_N;
-    wire VGA_CLK;
+	wire VGA_CLK;
 
     top_level uut(
         .CLOCK_50(CLOCK_50),
-        .SW(SW)
+        .SW(SW),
         .VGA_R(VGA_R),
         .VGA_G(VGA_G),
         .VGA_B(VGA_B),

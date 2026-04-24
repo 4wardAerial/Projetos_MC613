@@ -1,7 +1,6 @@
-`timescale 1ns/1ps
 module bg_ROM_tb;
-    wire [3:0] linha;
-    wire [3:0] coluna;
+    reg [3:0] linha;
+    reg [3:0] coluna;
 
     wire [3:0] data_out;
 
@@ -9,7 +8,7 @@ module bg_ROM_tb;
         .linha(linha),
         .coluna(coluna),
         .data_out(data_out)
-    )
+    );
     initial begin
         linha = 4'd0;
         coluna = 4'd0;
