@@ -1,12 +1,11 @@
 `timescale 1ns/1ps
 module ppu_top_tb;
 
-    reg clk;
+    reg clk = 0;
     reg [1:0] estado_olhos;
+	 reg estado_lingua;
     reg [9:0] pixel_x;
     reg [9:0] pixel_y;
-    reg video_active;
-    reg rst_n;
 
     wire [23:0] final_color;
 
@@ -14,54 +13,75 @@ module ppu_top_tb;
     ppu_top uut (
         .clk(clk),
         .estado_olhos(estado_olhos),
+		  .estado_lingua(estado_lingua),
         .pixel_x(pixel_x),
         .pixel_y(pixel_y),
-        .video_active(video_active),
-        .rst_n(rst_n),
+        .video_active(1'b1),
+        .rst_n(1'b1),
         .final_color(final_color)
     );
 
   
     // inverte o clk a cada 20ns
-    always #20 clk = ~clk;
+    always #10 clk = ~clk;
 
-    initial begin
-        clk = 0;
-        rst_n = 0; 
+    initial begin 
         estado_olhos = 2'b00;
-        pixel_x = 10'd0;
-        pixel_y = 10'd0;
-        video_active = 1'b1;
+		  estado_lingua = 1'b1;
 
         #50;
-        rst_n = 1;
 
         // Teste do Background
         #40;
-        pixel_x = 10'd100;
-        pixel_y = 10'd100;
+        pixel_x = 10'd10;
+        pixel_y = 10'd10;
 
-        // Teste do Sprite 0
+        // Teste do Sprite do olho esquerdo aberto
         #40;
-        pixel_x = 10'd35; 
-        pixel_y = 10'd42;
+        pixel_x = 10'd290;
+        pixel_y = 10'd220;
+		  
+		  		  
+		  // Teste do Sprite do olho direito aberto
+		  #40;
+		  pixel_x = 10'd330;
+        pixel_y = 10'd228;
+		  
+		  //fechando os olhos
+		  #40;
+		  estado_olhos = 2'b11;
+			
+			// Teste do Sprite do olho esquerdo fechado
+			#10;
+		  pixel_x = 10'd290;
+        pixel_y = 10'd220;
+		  
+		  // Teste do Sprite do olho direito fechado
+		  #40;
+        pixel_x = 10'd330;
+        pixel_y = 10'd228;
 
-        // Teste de alteração de estado (estado_olhos[0])
+        // Teste do Sprite da língua desativado
         #40;
-        estado_olhos = 2'b01; // estado_olhos = 1
-
-        // Teste do Sprite 1 
+        pixel_x = 10'd325; 
+        pixel_y = 10'd280;
+		  
+		  #40;
+		  estado_lingua = 1'b0;
+		  
+		  // Teste do Sprite da língua ativado
         #40;
-        pixel_x = 10'd75; 
-        pixel_y = 10'd42;
+        pixel_x = 10'd325; 
+        pixel_y = 10'd280;
+		  
 
         #100;
         $finish;
     end
 
     initial begin
-        $monitor("Tempo: %0t | rst_n: %b | X: %0d | Y: %0d | SW: %b | Final Color: %h", 
-                 $time, rst_n, pixel_x, pixel_y, SW, final_color);
+        $monitor("Tempo: %0t | X: %0d | Y: %0d | estado_olhos: %b | estado_lingua: %b| Final Color: %h", 
+                 $time, pixel_x, pixel_y, estado_olhos, estado_lingua, final_color);
     end
 
 endmodule
