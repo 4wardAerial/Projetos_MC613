@@ -1,0 +1,39 @@
+transcript on
+if ![file isdirectory controlador_vga_iputf_libs] {
+	file mkdir controlador_vga_iputf_libs
+}
+
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+###### Libraries for IPUTF cores 
+###### End libraries for IPUTF cores 
+###### MIF file copy and HDL compilation commands for IPUTF cores 
+
+
+vlog "/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/pll_ip_sim/pll_ip.vo"
+vlog "/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim/my_pll.vo"
+
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/top_level.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/sprite_selector.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/controlador_vga.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/ppu_top.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_sprites.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_tb.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v}
+
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v}
+vlog -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA {/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v}
+
+vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  tileset_ROM_tb
+
+add wave *
+view structure
+view signals
+run -all

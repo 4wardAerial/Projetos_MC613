@@ -1,0 +1,295 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim
+vbg_ROM
+Z1 !s110 1777039890
+!i10b 1
+!s100 QYfXHeX=gHV=MTEnZCV2<1
+IYJO>PlE`@zQFGYG9onJAH1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1776105337
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1777039890.000000
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/bg_ROM.v|
+!i113 1
+Z5 o-vlog01compat -work work
+Z6 !s92 -vlog01compat -work work +incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA
+Z7 tCvgOpt 0
+nbg_@r@o@m
+vcontrolador_vga
+R1
+!i10b 1
+!s100 WzlhXSVkDj[C>1Ye2BkIf0
+IkofA=:[m`4k_]]?N25c@22
+R2
+R0
+w1776104729
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/controlador_vga.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/controlador_vga.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/controlador_vga.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/controlador_vga.v|
+!i113 1
+R5
+R6
+R7
+vfind_background_pixel
+R1
+!i10b 1
+!s100 WQiVQFmA;^0z`CbK^3>Nm0
+IT6=]I4MmID7fekJj^lZiF3
+R2
+R0
+w1776111008
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_background_pixel.v|
+!i113 1
+R5
+R6
+R7
+vfind_sprites
+R1
+!i10b 1
+!s100 =<G[ZR5amNcnbel<addfm2
+IDAODl9eSQBYZGo6Je@;8T3
+R2
+R0
+Z8 w1776446644
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_sprites.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_sprites.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_sprites.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/find_sprites.v|
+!i113 1
+R5
+R6
+R7
+vlayer_selector
+R1
+!i10b 1
+!s100 Oh?UTK3:Q]En4JF7AB>Go1
+I5F=RQEN>72O<`;hKo[mHS2
+R2
+R0
+w1775506248
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/layer_selector.v|
+!i113 1
+R5
+R6
+R7
+vmy_pll
+R1
+!i10b 1
+!s100 zD=L`U[7HUm0c:X3A>B0R0
+IRJ1EcOXIPGKO8lON;8g:M3
+R2
+R0
+w1777039116
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim/my_pll.vo
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim/my_pll.vo
+Z9 L0 31
+R3
+r1
+!s85 0
+31
+Z10 !s108 1777039889.000000
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim/my_pll.vo|
+!s90 -reportprogress|300|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_sim/my_pll.vo|
+!i113 1
+R7
+vmy_pll_tb
+R1
+!i10b 1
+!s100 L=GX9c?FlhoXe[AO0Ejg[1
+IKPnnlDXU3ecmbTZ]hZPfC2
+R2
+R0
+w1777039265
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_tb.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_tb.v
+L0 3
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/my_pll_tb.v|
+!i113 1
+R5
+R6
+R7
+vpll_ip
+!s110 1777039889
+!i10b 1
+!s100 WQ:5DQ>307ene81?ATd;o1
+IoSP6YFCPPV>_PLP<V^GR63
+R2
+R0
+w1776103842
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/pll_ip_sim/pll_ip.vo
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/pll_ip_sim/pll_ip.vo
+R9
+R3
+r1
+!s85 0
+31
+R10
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/pll_ip_sim/pll_ip.vo|
+!s90 -reportprogress|300|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/pll_ip_sim/pll_ip.vo|
+!i113 1
+R7
+vppu_top
+R1
+!i10b 1
+!s100 zR1_Dn20L?7:i<FcSAO9`0
+I0T>^BUaRiUVi8ciD]PaGd2
+R2
+R0
+R8
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/ppu_top.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/ppu_top.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/ppu_top.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/ppu_top.v|
+!i113 1
+R5
+R6
+R7
+vsprite_selector
+R1
+!i10b 1
+!s100 R@b4RnLC0?Q=6f;@7HNdF0
+IKzChl;BKdGdKWJB43oZ8a2
+R2
+R0
+w1776445273
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/sprite_selector.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/sprite_selector.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/sprite_selector.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/sprite_selector.v|
+!i113 1
+R5
+R6
+R7
+vtileset_ROM
+R1
+!i10b 1
+!s100 JE`h60[EUoVbglB?P60al0
+I]:[agf;;=WoOJJ=<e=4GA0
+R2
+R0
+w1776104070
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM.v|
+!i113 1
+R5
+R6
+R7
+ntileset_@r@o@m
+vtileset_ROM_tb
+R1
+!i10b 1
+!s100 K`<MehJFS6JVTzTI@jSfj2
+Il[1?coLj9BmIX<Vj]QBO72
+R2
+R0
+w1776102214
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/tileset_ROM_tb.v|
+!i113 1
+R5
+R6
+R7
+ntileset_@r@o@m_tb
+vtop_level
+R1
+!i10b 1
+!s100 N`@O?j:>=IX57Hk_iFMmh1
+IU1VT=zP>b`[^6:iScb:iH0
+R2
+R0
+w1776445131
+8/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/top_level.v
+F/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/top_level.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 /home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/top_level.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA|/home/f-ec2024/ra281289/Documents/Projetos_MC613/P2_VGA/top_level.v|
+!i113 1
+R5
+R6
+R7
