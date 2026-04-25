@@ -15,4 +15,8 @@ module tileset_ROM_tb;
 		# 10;
 		$finish;
 	end
+	initial begin
+        $monitor("Tempo: %0t | ID requisitado: %0d | Cor devolvida (Hex): %h", 
+                 $time, id, cor);
+    end
 endmodule
