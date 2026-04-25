@@ -41,25 +41,21 @@ module ppu_top_tb;
         pixel_x = 10'd290;
         pixel_y = 10'd220;
 		  
-		  		  
+		  
+		  //fechando o olho esquerdo
+		  #40;
+		  estado_olhos[1] = 1'b1;
+			
+		  
 		  // Teste do Sprite do olho direito aberto
 		  #40;
 		  pixel_x = 10'd330;
         pixel_y = 10'd228;
-		  
-		  //fechando os olhos
-		  #40;
-		  estado_olhos = 2'b11;
 			
-			// Teste do Sprite do olho esquerdo fechado
-			#10;
-		  pixel_x = 10'd290;
-        pixel_y = 10'd220;
-		  
-		  // Teste do Sprite do olho direito fechado
+			//fechando o olho direito
 		  #40;
-        pixel_x = 10'd330;
-        pixel_y = 10'd228;
+		  estado_olhos[0] = 1'b1;
+		  
 
         // Teste do Sprite da língua desativado
         #40;
