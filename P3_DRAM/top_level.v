@@ -1,4 +1,4 @@
-module top_level ()
+module top_level (
 
 );
 
