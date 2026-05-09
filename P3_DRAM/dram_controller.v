@@ -37,7 +37,6 @@ module dram_controller ()
 	localparam TRC = 9;
 	localparam TDPL = 2;
 	localparam TMRD = 3;
-	//outros
 	localparam INIT_DELAY = 29000;
 	localparam REF_PERIOD = 1000; // ciclos entre 2 refresh
 	
@@ -71,7 +70,6 @@ module dram_controller ()
 			state <= S_INIT_WAIT
 			delay_ctr <= 0;
 			ref_ctr <= 0;
-			need_refresh <= 0;
 		end else begin
 			state <= next_state;
 			delay_ctr <= next_delay_ctr;
@@ -102,6 +100,7 @@ module dram_controller ()
 			case(state) begin
 				S_INIT_WAIT: begin
 					init_ref_ctr = 9;
+					need_refresh = 0;
 					next_delay_ctr = INIT_delay;
 					next_state = S_INIT_PRE;
 				end
