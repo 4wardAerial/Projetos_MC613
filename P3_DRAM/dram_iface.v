@@ -1,122 +1,186 @@
 module dram_iface (
-	input wire clk,	// clock
-	input wire rst,	// Reset
-	input wire [9:0] SW,		// Switches de entrada (endereço parcial e dado)
-	input wire [3:0] KEY,	// Botões da placa (KEY[3] = write, KEY[0] = reset)
-	
-	input wire ready,	// Indica que o controlador está pronto para receber uma nova operação
-	inout wire [7:0] data, // Dado lido/a ser escrito
-	
-	output wire [6:0] HEX0,	// Exibe o dado de entrada (escrita)
-	output wire [6:0] HEX1,	// Exibe o valor lido da memória
-	output wire [6:0] HEX4,	// Exibe parte do endereço
-	output wire [6:0] HEX5,	// Exibe parte do endereço
-	
-	output wire [25:0] address,	// Endereço completo da DRAM
-	output reg req,	// Indica a recepção de um comando no controlador.
-	output reg wEn	// Indica sinal permissão de escrita (o comando é uma escrita)
+    input  wire        clk,
+    input  wire        rst,       // Reset limpo vindo do top_level
+    input  wire [9:0]  SW,        // Chaves da placa
+    input  wire [3:0]  KEY,       // Botões
+    
+    input  wire        ready,     // Status do controlador
+    inout  wire [7:0]  data,      // Barramento bidirecional de dados
+    output wire        req,       // Pedido de operação
+    output wire        wEn,       // 1 = Write, 0 = Read
+    output wire [25:0] address,   // Endereço para a memória
+    
+    output wire [6:0]  HEX0,      // Displays de 7 Segmentos
+    output wire [6:0]  HEX1,
+    output wire [6:0]  HEX4,
+    output wire [6:0]  HEX5,
+	 output wire [2:0] teste
 );
+assign teste = state;
 
-	//estados
-	localparam READY = 3'd0, REQ_READ = 3'd1, WAIT_READ = 3'd2;
-	localparam REQ_WRITE = 3'd3, WAIT_WRITE = 3'd4;
+    // =========================================================================
+    // PARÂMETROS DOS ESTADOS
+    // =========================================================================
+    parameter S_IDLE         = 3'd0;
+    parameter S_REQ_RD       = 3'd1;
+    parameter S_WAIT_RD      = 3'd2;
+    parameter S_REQ_WR       = 3'd3;
+    parameter S_WAIT_WR      = 3'd4;
+    parameter S_AUTO_REQ_RD  = 3'd5;
+    parameter S_AUTO_WAIT_RD = 3'd6;
 
-	reg [2:0] state, next_state;
+    // =========================================================================
+    // REGISTRADORES INTERNOS
+    // =========================================================================
+    reg [2:0] state;
+    reg       req_reg;
+    reg       wEn_reg;
+    reg       data_dir;       // 1 = Interface conduz o dado, 0 = High-Z (Controlador conduz)
+    reg [7:0] data_out_reg;   // O que vamos escrever
+    reg [7:0] display_data;   // O que lemos da memória
+    reg [5:0] last_sw_addr;   // Memória do último endereço
 
-	assign address = {SW[9], 1'b0, SW[8:6], 19'b0, SW[5:4]};
+    // Sincronizadores para o botão KEY[3] (Antitrepidacao / Debounce)
+    reg k3_sync1, k3_sync2, k3_last;
 
-	reg [25:0] last_address;
-	wire address_changed = (last_address != address);
-	
-	reg key3_prev, key3_now; // estados atuais e anterior do botão de escrita
-	wire write_trigger = (!key3_now && key3_prev); // 1 ao pressionar o botão de escrita
-	
-	reg [7:0] data_out;
-	reg [7:0] data_display;
-	reg data_dir; // 1 = escrita, 0 = leitura
-	assign data = data_dir ? data_out : 8'bz;
+    // =========================================================================
+    // DETETORES DE EVENTOS (COMBINACIONAIS)
+    // =========================================================================
+    // KEY[3] é ativo em LOW. A escrita dispara na borda de descida (quando aperta)
+    wire write_trigger = (k3_last == 1'b1 && k3_sync2 == 1'b0);
+    
+    // O endereço mudou se as chaves SW[9:4] estiverem diferentes do último valor gravado
+    wire addr_changed = (SW[9:4] != last_sw_addr);
 
-	always @(posedge clk) begin
-		if(rst) begin
-			state <= READY;
-			last_address <= 26'b0;
-			key3_prev <= 1'b1;
-			key3_now <= 1'b1;
-			data_display <= 8'b0;
-		end else begin
-			key3_prev <= key3_now;
-			key3_now <= KEY[3];
-			state <= next_state;
-			
-			if(state == WAIT_READ && ready) begin
-				data_display <= data;
-				last_address <= address;
-			end
-		end
-	end
-	
-	always @(*) begin
-		next_state = state;
-		req = 1'b0;
-		wEn = 1'b0;
-		data_dir = 1'b0;
-		data_out = 8'b0;
-		
-		case (state)
-			READY: begin
-				if (ready) begin
-					if (write_trigger) begin
-						next_state = REQ_WRITE;
-					end else if (address_changed) begin
-						next_state = REQ_READ;
-					end
-				end
-			end
-			
-			REQ_READ: begin
-				req = 1'b1;
-				wEn = 1'b0;
-				next_state = WAIT_READ;
-			end
-			
-			WAIT_READ: begin
-				if(ready)
-					next_state = READY;
-			end
-			
-			REQ_WRITE: begin
-				data_dir = 1'b1;
-				req = 1'b1;
-				wEn = 1'b1;
-				data_out = {4'b0000, SW[3:0]};
-				next_state = WAIT_WRITE;
-			end
-			
-			WAIT_WRITE: begin
-				data_dir = 1'b1;
-				wEn = 1'b1;
-				data_out = {4'b0000, SW[3:0]};	
-				if(ready)
-					next_state = REQ_READ;
-			end
-		endcase
-	end
-	
-	bin2hex converter1 (
-		.BIN(SW[3:0]),
-		.HEX(HEX0)
-	);
-	bin2hex converter2 (
-		.BIN(data_display[3:0]),
-		.HEX(HEX1)
-	);
-	bin2hex converter3 (
-		.BIN({2'b00, address[25], address[23]}),
-		.HEX(HEX5)
-	);
-	bin2hex converter4 (
-		.BIN({address[22:21], address[1:0]}),
-		.HEX(HEX4)
-	);
-	
+    // =========================================================================
+    // ATRIBUIÇÕES CONTÍNUAS (ASSIGNS)
+    // =========================================================================
+    assign req = req_reg;
+    assign wEn = wEn_reg;
+    
+    // Concatena o endereço selecionado com zeros para formar os 26 bits
+    assign address = {20'd0, last_sw_addr};
+
+    // Controle inteligente do barramento tristate
+    assign data = data_dir ? data_out_reg : 8'bz;
+
+    // =========================================================================
+    // MÁQUINA DE ESTADOS PRINCIPAL (SÍNCRONA)
+    // =========================================================================
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            state        <= S_IDLE;
+            req_reg      <= 1'b0;
+            wEn_reg      <= 1'b0;
+            data_dir     <= 1'b0;
+            data_out_reg <= 8'b0;
+            display_data <= 8'b0;
+            last_sw_addr <= SW[9:4]; // Inicia sincronizado com as chaves
+            
+            k3_sync1     <= 1'b1;
+            k3_sync2     <= 1'b1;
+            k3_last      <= 1'b1;
+        end else begin
+            
+            // 1. Atualiza o filtro do botão
+            k3_sync1 <= KEY[3];
+            k3_sync2 <= k3_sync1;
+            k3_last  <= k3_sync2;
+
+            // 2. Transições de Estado
+            case (state)
+                
+                // --- OCIOSO E VIGILANTE ---
+                S_IDLE: begin
+                    req_reg  <= 1'b0;
+                    data_dir <= 1'b0; // Libera o barramento
+                    
+                    if (write_trigger && ready) begin
+                        state        <= S_REQ_WR;
+                        req_reg      <= 1'b1;
+                        wEn_reg      <= 1'b1;
+                        data_dir     <= 1'b1; // Toma posse do barramento
+                        data_out_reg <= {4'h0, SW[3:0]}; // Carrega o dado
+                        last_sw_addr <= SW[9:4]; // Memoriza onde vai escrever
+                    
+                    end else if (addr_changed && ready) begin
+                        state        <= S_REQ_RD;
+                        req_reg      <= 1'b1;
+                        wEn_reg      <= 1'b0;
+                        data_dir     <= 1'b0;
+                        last_sw_addr <= SW[9:4]; // Memoriza o novo endereço
+                    end
+                end
+
+                // --- FLUXO DE LEITURA ---
+                S_REQ_RD: begin
+                    if (!ready) begin 
+                        // Controlador reconheceu e baixou o ready
+                        state   <= S_WAIT_RD;
+                        req_reg <= 1'b0; // Tira o dedo do botão
+                    end
+                end
+
+                S_WAIT_RD: begin
+                    if (ready) begin 
+                        // Controlador terminou e devolveu o ready alto
+                        display_data <= data; // Bate a foto do dado lido
+                        state        <= S_IDLE;
+                    end
+                end
+
+                // --- FLUXO DE ESCRITA ---
+                S_REQ_WR: begin
+                    // Mantém a direção do dado firme!
+                    wEn_reg  <= 1'b1;
+                    data_dir <= 1'b1;
+                    
+                    if (!ready) begin 
+                        state   <= S_WAIT_WR;
+                        req_reg <= 1'b0;
+                    end
+                end
+
+                S_WAIT_WR: begin
+                    if (ready) begin 
+                        // Escrita finalizada! Dispara uma leitura automática
+                        state    <= S_AUTO_REQ_RD;
+                        req_reg  <= 1'b1;
+                        wEn_reg  <= 1'b0;
+                        data_dir <= 1'b0; // Solta o barramento para poder ler
+                    end
+                end
+
+                // --- FLUXO DE LEITURA AUTOMÁTICA (Após Escrita) ---
+                S_AUTO_REQ_RD: begin
+                    if (!ready) begin
+                        state   <= S_AUTO_WAIT_RD;
+                        req_reg <= 1'b0;
+                    end
+                end
+
+                S_AUTO_WAIT_RD: begin
+                    if (ready) begin
+                        display_data <= data; // Atualiza o display com o dado recém-escrito
+                        state        <= S_IDLE;
+                    end
+                end
+
+                // Rota de Fuga
+                default: state <= S_IDLE;
+            endcase
+        end
+    end
+
+    // =========================================================================
+    // INSTANCIAÇÃO DOS DECODIFICADORES 7-SEGMENTOS
+    // =========================================================================
+    // Exibe o dado lido em Hexadecimal nos displays 0 e 1
+    bin2hex dec0 (.BIN(SW[3:0]), .HEX(HEX0));
+    bin2hex dec1 (.BIN(display_data[7:4]), .HEX(HEX1));
+    
+    // Exibe os 6 bits de endereço (SW[9:4]) nos displays 4 e 5
+    bin2hex dec4 (.BIN(last_sw_addr[3:0]),     .HEX(HEX4));
+    bin2hex dec5 (.BIN({2'b00, last_sw_addr[5:4]}), .HEX(HEX5));
+
 endmodule

@@ -19,17 +19,25 @@ module top_level (
 	output wire [6:0] HEX0,
 	output wire [6:0] HEX1,
 	output wire [6:0] HEX4,
-	output wire [6:0] HEX5
+	output wire [6:0] HEX5,
+	output wire [9:0] LEDR
 );
 
-wire rst = ~KEY[0];
 wire ready;
 wire [7:0] data;
 wire [25:0] address;
 wire req;
 wire wEn;
+wire clk_controller;
+
+wire 	rst_raw = ~KEY[1];
+reg rst;
+always @(posedge clk_controller) begin
+	rst <= rst_raw;
+end
 
 dram_iface interface(
+	.clk(clk_controller),
 	.rst(rst),
 	.SW(SW),
 	.KEY(KEY),
@@ -44,10 +52,12 @@ dram_iface interface(
 	
 	.address(address),
 	.req(req),
-	.wEn(wEn)
+	.wEn(wEn),
+	.teste(LEDR[9:6])
 );
 
 dram_controller controller(
+	.clk(clk_controller),
 	.rst(rst),
 	.address(address),
 	.data(data),
@@ -66,7 +76,15 @@ dram_controller controller(
 	.dram_we_n(DRAM_WE_N),
 	.dram_cas_n(DRAM_CAS_N),
 	.dram_ras_n(DRAM_RAS_N),
-	.dram_cs_n(DRAM_CS_N)
+	.dram_cs_n(DRAM_CS_N),
+	.teste(LEDR[5:0])
+);
+
+my_pll pll(
+	.refclk(CLOCK_50),
+	.rst(1'b0),
+	.outclk_0(clk_controller),
+	.outclk_1(DRAM_CLK)
 );
 
 endmodule

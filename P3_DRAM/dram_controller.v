@@ -1,199 +1,241 @@
 module dram_controller (
-	input wire clk,	// clock
-	input wire rst,	// Reset
-	input wire [25:0] address,	// Endereço completo da DRAM
-	inout wire [7:0] data, // Dado lido/a ser escrito
-	
-	
-	input wire req,	// Indica a recepção de um comando no controlador.
-	input wire wEn,	// Indica sinal permissão de escrita (o comando é uma escrita)
-	
-	output reg ready,	// Indica que o controlador está pronto para receber uma nova operação
-	inout wire [15:0] dram_dq,
-	output reg [12:0] dram_addr,
-	output reg [1:0] dram_ba,
-	output wire dram_cke,
-	output wire dram_ldqm,
-	output wire dram_udqm,
-	output wire dram_we_n,
-	output wire dram_cas_n,
-	output wire dram_ras_n,
-	output wire dram_cs_n
+    input  wire        clk,       // Clock principal (143 MHz da PLL)
+    input  wire        rst,       // Reset (sincronizado)
+    input  wire [25:0] address,   // Endereço completo
+    inout  wire [7:0]  data,      // Barramento de dados de 8 bits com a interface
+    
+    input  wire        req,       // Pedido de operação
+    input  wire        wEn,       // 1 = Write, 0 = Read
+    
+    output wire        ready,     // 1 = Controlador livre
+    inout  wire [15:0] dram_dq,   // Pinos físicos de dados da SDRAM
+    output reg  [12:0] dram_addr, // Pinos físicos de endereço da SDRAM
+    output reg  [1:0]  dram_ba,   // Pinos físicos de Bank Address
+    output wire        dram_cke,  // Clock Enable
+    output wire        dram_ldqm, // Lower Byte Mask
+    output wire        dram_udqm, // Upper Byte Mask
+    output wire        dram_we_n, // Write Enable
+    output wire        dram_cas_n,// Column Address Strobe
+    output wire        dram_ras_n,// Row Address Strobe
+    output wire        dram_cs_n, // Chip Select
+    output wire [5:0]  teste      // Para os LEDs de debug
 );
 
-	//comandos da DRAM
-	localparam CMD_MRS  = 4'b0000;
-	localparam CMD_REF  = 4'b0001;
-	localparam CMD_PRE  = 4'b0010;
-	localparam CMD_ACT  = 4'b0011;
-	localparam CMD_WRITE = 4'b0100;
-	localparam CMD_READ = 4'b0101;
-	localparam CMD_NOP  = 4'b0111;
-	
-	//tempos em ciclos de clock
-	parameter TRCD = 3;
-	parameter TCAS = 3;
-	parameter TRP = 3;
-	parameter TRC = 9;
-	parameter TDPL = 2;
-	parameter TMRD = 3;
-	parameter TRAS = 6;
-	parameter INIT_DELAY = 29000;
-	parameter REF_PERIOD = 1000; // ciclos entre 2 refresh
-	
-	// Estados da máquina de estados
-	localparam S_INIT_WAIT = 5'd0, S_INIT_PRE = 5'd1, S_INIT_REFS = 5'd2;
-	localparam S_INIT_MRS = 5'd3, S_READY     = 5'd4, S_ACT       = 5'd5;
-	localparam S_RCD      = 5'd6, S_READ      = 5'd7, S_CAS       = 5'd8;
-	localparam S_WRITE    = 5'd9, S_DPL      = 5'd10, S_PRE       = 5'd11;
-	localparam S_RP      = 5'd12, S_REF      = 5'd13, S_RC        = 5'd15;
-	
-	reg [4:0] state, next_state; // estado atual e próximo
-	reg [15:0] delay_ctr, next_delay_ctr; // conatdor do delay necessário na transição de estados
-	reg [10:0] ref_ctr, next_ref_ctr; // contador para marcar quando é necessário fazer um refresh
-	reg [3:0] init_ref_ctr; // contador para ser feito o número correto de refresh na inicialização
-	reg need_refresh; // 1 quando precisa de refresh
-	reg [3:0] dram_cmd; // comando a ser passado para a DRAM listados em "comandos da DRAM"
-	
-	reg [7:0] write_data;
-	reg output_en;
-	
-	assign dram_dq = output_en ? ((address[0] == 1) ? {write_data, 8'b0} : {8'b0, write_data}) : 16'bz; // modo 
-	assign data = (!output_en && !wEn) ? ((address[0] == 1) ? dram_dq[15:8] : dram_dq[7:0]) : 8'bz;
-	assign ready = (state == S_READY) && (next_state == S_READY) && (delay_ctr == 0) && (!need_refresh);
-	//sinais fixos
-	assign dram_cke = 1'b1;
-	assign {dram_cs_n, dram_ras_n, dram_cas_n, dram_we_n} = dram_cmd;
-	assign {dram_udqm, dram_ldqm} = (address[0] == 1) ? 2'b01 : 2'b10;
-	
-	always @(posedge clk or posedge rst) begin
-		if (rst) begin
-			state <= S_INIT_WAIT;
-			delay_ctr <= 0;
-			ref_ctr <= 0;
-		end else begin
-			state <= next_state;
-			delay_ctr <= next_delay_ctr;
-			ref_ctr <= next_ref_ctr;
-		end
-	end
-	
-	always @(*) begin
-		//default
-		next_state = state;
-		next_delay_ctr = delay_ctr;
-		dram_cmd = CMD_NOP;
-		output_en = 1'b0;
-		dram_addr = 13'b0;
-		dram_ba = 2'b0;
-		
-		if(ref_ctr >= REF_PERIOD) begin
-			need_refresh = 1;
-			next_ref_ctr = 0;
-		end else begin
-			next_ref_ctr = ref_ctr + 1;
-		end
-		
-		if(delay_ctr > 0) begin
-			next_delay_ctr = delay_ctr - 1;
-		end else begin
-			case(state)
-				S_INIT_WAIT: begin
-					init_ref_ctr = 9;
-					need_refresh = 0;
-					next_delay_ctr = INIT_DELAY;
-					next_state = S_INIT_PRE;
-				end
-				
-				S_INIT_PRE: begin
-					dram_addr[10] = 1'b1;
-					dram_cmd = CMD_PRE;
-					next_state = S_INIT_REFS;
-					next_delay_ctr = TRP;
-				end
-				
-				S_INIT_REFS: begin
-					dram_cmd = CMD_REF;
-					next_delay_ctr = TRC;
-					if (init_ref_ctr == 0) begin
-						next_state = S_INIT_MRS;
-					end 	else begin
-						init_ref_ctr = init_ref_ctr - 1;
-						next_state = S_INIT_REFS;
-					end
-					
-				end
-				
-				S_INIT_MRS: begin
-					dram_cmd = CMD_MRS;
-					dram_addr = 13'b000_1_00_011_0_000;
-					next_delay_ctr = TMRD;
-					next_state = S_READY;
-				end
-				
-				S_READY: begin
-					if(need_refresh) begin
-						next_delay_ctr = TRP;
-						next_state = S_REF;
-					end else if (req) begin
-						next_state = S_ACT;
-					end
-				end
-				
-				S_ACT: begin
-					dram_cmd = CMD_ACT;
-					dram_ba = address[25:24];
-					dram_addr = address[23:11];
-					next_delay_ctr = TRCD;
-					next_state = wEn ? S_WRITE : S_READ;
-				end
-				
-				S_READ: begin
-					dram_cmd = CMD_READ;
-					
-					dram_ba = address[25:24];
-					dram_addr[9:0] = address[10:1];
-					dram_addr[10] = 1'b0; // desabilita auto precharge	
-					
-					next_delay_ctr = TCAS;
-					next_state = S_PRE;
-				end
-				
-				S_WRITE: begin
-					dram_cmd = CMD_WRITE;
-					
-					dram_ba = address[25:24];
-					dram_addr[9:0] = address[10:1];
-					dram_addr[10] = 1'b0; // desabilita auto precharge	
-					
-					write_data = data;
-					output_en = 1'b1;
-					
-					next_delay_ctr = TDPL + TRAS;
-					next_state = S_PRE;
-				end
-				
-				S_PRE: begin
-					dram_cmd = CMD_PRE;
-					
-					dram_addr[10] = 1'b1; //all banks
-					next_delay_ctr = TRP + TRAS;
-					next_state = S_READY;
-				end
-				
-				S_REF: begin
-					dram_cmd = CMD_REF;
-					need_refresh = 1'b0;
-					
-					next_delay_ctr = TRC;
-					next_state = S_READY;
-				end
-			endcase
-		end
-		
-		
-	end
-	
-	
-	
+    // =========================================================================
+    // PARÂMETROS DE TEMPO E COMANDOS
+    // =========================================================================
+    // Comandos SDRAM {CS, RAS, CAS, WE}
+    parameter CMD_MRS   = 4'b0000;
+    parameter CMD_REF   = 4'b0001;
+    parameter CMD_PRE   = 4'b0010;
+    parameter CMD_ACT   = 4'b0011;
+    parameter CMD_WRITE = 4'b0100;
+    parameter CMD_READ  = 4'b0101;
+    parameter CMD_NOP   = 4'b0111;
+
+    // Tempos em ciclos de clock (para 143 MHz)
+    parameter TRCD       = 15'd3;
+    parameter TCAS       = 15'd3;
+    parameter TRP        = 15'd3;
+    parameter TRC        = 15'd9;
+    parameter TDPL       = 15'd2;
+    parameter TMRD       = 15'd3;
+    parameter TRAS       = 15'd6;
+    parameter INIT_DELAY = 15'd30000; // ~200us
+    parameter REF_PERIOD = 15'd1000;  // Refresh a cada ~7us
+
+    // Codificação dos Estados
+    parameter S_INIT_WAIT = 6'd0, S_INIT_PRE = 6'd1,  S_INIT_REFS = 6'd2;
+    parameter S_INIT_MRS  = 6'd3, S_READY    = 6'd4,  S_ACT       = 6'd5;
+    parameter S_READ      = 6'd7, S_WRITE    = 6'd9,  S_PRE       = 6'd11;
+    parameter S_REF       = 6'd13, S_CAPT    = 6'd16;
+
+    // =========================================================================
+    // REGISTRADORES INTERNOS
+    // =========================================================================
+    reg [5:0]  state;
+    reg [15:0] delay_ctr;
+    reg [10:0] ref_ctr;
+    reg [3:0]  init_ref_ctr;
+    reg        need_refresh;
+    reg        is_write_op;    // Memoriza se a operação é R ou W
+
+    reg [3:0]  dram_cmd;
+    reg [7:0]  captured_data;
+    reg        output_en;
+
+    // =========================================================================
+    // LÓGICA COMBINACIONAL DE I/O (Assigns)
+    // =========================================================================
+    // Sinaliza à interface que estamos prontos para trabalhar
+    assign ready = (state == S_READY) && (delay_ctr == 0) && (!need_refresh);
+    
+    // Liga o estado aos LEDs
+    assign teste = state;
+
+    // Pinos fixos da SDRAM
+    assign dram_cke = 1'b1;
+    assign {dram_cs_n, dram_ras_n, dram_cas_n, dram_we_n} = dram_cmd;
+
+    // Máscara de Bytes (DQM): Aponta fixamente para o byte desejado (0 = Ativo, 1 = Mascarado)
+    assign {dram_udqm, dram_ldqm} = (address[0] == 1) ? 2'b01 : 2'b10;
+
+    // Roteamento Bidirecional do Barramento
+    // Escrita: Pega do 'data' (8 bits) e injeta na metade correta do 'dram_dq' (16 bits)
+    assign dram_dq = output_en ? ((address[0] == 1) ? {data, 8'h00} : {8'h00, data}) : 16'bz;
+    
+    // Leitura: Devolve para a placa o dado que foi seguramente fotografado
+    assign data = (!output_en && !wEn) ? captured_data : 8'bz;
+
+    // =========================================================================
+    // MÁQUINA DE ESTADOS (Síncrona, Bloco Único)
+    // =========================================================================
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            state         <= S_INIT_WAIT;
+            delay_ctr     <= 0;
+            ref_ctr       <= 0;
+            init_ref_ctr  <= 0;
+            need_refresh  <= 0;
+            is_write_op   <= 0;
+            captured_data <= 8'b0;
+            dram_cmd      <= CMD_NOP;
+            dram_addr     <= 13'b0;
+            dram_ba       <= 2'b0;
+            output_en     <= 1'b0;
+        end else begin
+            
+            // 1. Contador de Auto-Refresh (Roda em background o tempo todo)
+            if (ref_ctr >= REF_PERIOD) begin
+                need_refresh <= 1'b1;
+                ref_ctr      <= 0;
+            end else begin
+                ref_ctr <= ref_ctr + 1;
+            end
+
+            // 2. Valores Padrão por ciclo
+            // A menos que o case(state) diga o contrário, o comando é sempre NOP
+            dram_cmd  <= CMD_NOP; 
+            output_en <= 1'b0;
+
+            // 3. Controle de Atrasos e Transições
+            if (delay_ctr > 0) begin
+                delay_ctr <= delay_ctr - 1;
+                
+                // Mantém o barramento ativado durante o voo da ESCRITA
+                if (state == S_WRITE) output_en <= 1'b1;
+
+                // O MOMENTO MÁGICO DA CAPTURA (LEITURA)
+                // Quando falta apenas 1 ciclo para o S_CAPT acabar, a SDRAM cospe o dado. Bate a foto!
+                if (delay_ctr == 1 && state == S_CAPT) begin
+                    captured_data <= (address[0] == 1) ? dram_dq[15:8] : dram_dq[7:0];
+                end
+
+            end else begin
+                // Quando o delay acaba, executamos o próximo passo
+                case (state)
+                    
+                    // --- SEQUÊNCIA DE INICIALIZAÇÃO ---
+                    S_INIT_WAIT: begin
+                        delay_ctr <= INIT_DELAY;
+                        state     <= S_INIT_PRE;
+                    end
+                    
+                    S_INIT_PRE: begin
+                        dram_cmd      <= CMD_PRE;
+                        dram_addr[10] <= 1'b1; // Precharge All Banks
+                        delay_ctr     <= TRP;
+                        init_ref_ctr  <= 8;    // Precisamos fazer 8 refreshes
+                        state         <= S_INIT_REFS;
+                    end
+                    
+                    S_INIT_REFS: begin
+                        dram_cmd  <= CMD_REF;
+                        delay_ctr <= TRC;
+                        if (init_ref_ctr == 0) begin
+                            state <= S_INIT_MRS;
+                        end else begin
+                            init_ref_ctr <= init_ref_ctr - 1;
+                            state        <= S_INIT_REFS;
+                        end
+                    end
+                    
+                    S_INIT_MRS: begin
+                        dram_cmd  <= CMD_MRS;
+                        dram_addr <= 13'b000_1_00_011_0_000; // CL=3, Burst=1
+                        delay_ctr <= TMRD;
+                        state     <= S_READY;
+                    end
+                    
+                    // --- OCIOSO (Aguardando Ordens) ---
+                    S_READY: begin
+                        if (need_refresh) begin
+                            state <= S_REF;
+                        end else if (req) begin
+                            state       <= S_ACT;
+                            is_write_op <= wEn; // Tira a foto de qual é a operação
+                        end
+                    end
+                    
+                    // --- REFRESH DE ROTINA ---
+                    S_REF: begin
+                        dram_cmd     <= CMD_REF;
+                        delay_ctr    <= TRC;
+                        need_refresh <= 1'b0; // Limpa o flag
+                        state        <= S_READY;
+                    end
+                    
+                    // --- OPERAÇÕES DE LEITURA E ESCRITA ---
+                    S_ACT: begin
+                        dram_cmd  <= CMD_ACT;
+                        dram_ba   <= address[25:24];
+                        dram_addr <= address[23:11]; // Row Address
+                        delay_ctr <= TRCD;
+                        state     <= is_write_op ? S_WRITE : S_READ;
+                    end
+                    
+                    S_WRITE: begin
+                        dram_cmd      <= CMD_WRITE;
+                        dram_ba       <= address[25:24];
+                        dram_addr[9:0]<= address[10:1]; // Column Address
+                        dram_addr[10] <= 1'b0;          // Sem Auto-Precharge
+                        
+                        output_en <= 1'b1; // Libera a FPGA para mandar o dado
+                        
+                        delay_ctr <= TDPL + TRAS; // Aguarda o dado gravar fisicamente no silício
+                        state     <= S_PRE;
+                    end
+                    
+                    S_READ: begin
+                        dram_cmd      <= CMD_READ;
+                        dram_ba       <= address[25:24];
+                        dram_addr[9:0]<= address[10:1]; // Column Address
+                        dram_addr[10] <= 1'b0;          // Sem Auto-Precharge
+                        
+                        delay_ctr <= TCAS + 1; // CL = 3 + 1 para o tempo de viagem do elétron
+                        state     <= S_CAPT;
+                    end
+                    
+                    S_CAPT: begin
+                        // A foto do dado foi tirada ali em cima no bloco "delay_ctr > 0".
+                        // Agora só mandamos fechar a linha.
+                        state <= S_PRE;
+                    end
+                    
+                    S_PRE: begin
+                        dram_cmd      <= CMD_PRE;
+                        dram_addr[10] <= 1'b1; // Fecha todos os bancos
+                        delay_ctr     <= TRP;
+                        state         <= S_READY;
+                    end
+                    
+                    // --- ROTA DE FUGA SEGURA ---
+                    default: begin
+                        state <= S_INIT_WAIT;
+                    end
+                endcase
+            end
+        end
+    end
+
 endmodule
