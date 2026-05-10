@@ -31,15 +31,15 @@ module dram_controller (
 	localparam CMD_NOP  = 4'b0111;
 	
 	//tempos em ciclos de clock
-	localparam TRCD = 3;
-	localparam TCAS = 3;
-	localparam TRP = 3;
-	localparam TRC = 9;
-	localparam TDPL = 2;
-	localparam TMRD = 3;
-	localparam TRAS = 6;
-	localparam INIT_DELAY = 29000;
-	localparam REF_PERIOD = 1000; // ciclos entre 2 refresh
+	parameter TRCD = 3;
+	parameter TCAS = 3;
+	parameter TRP = 3;
+	parameter TRC = 9;
+	parameter TDPL = 2;
+	parameter TMRD = 3;
+	parameter TRAS = 6;
+	parameter INIT_DELAY = 29000;
+	parameter REF_PERIOD = 1000; // ciclos entre 2 refresh
 	
 	// Estados da máquina de estados
 	localparam S_INIT_WAIT = 5'd0, S_INIT_PRE = 5'd1, S_INIT_REFS = 5'd2;
@@ -58,9 +58,9 @@ module dram_controller (
 	reg [7:0] write_data;
 	reg output_en;
 	
-	assign sdram_dq = output_en ? ((address[0] == 1) ? {write_data, 8'b0} : {8'b0, write_data}) : 16'bz; // modo 
+	assign dram_dq = output_en ? ((address[0] == 1) ? {write_data, 8'b0} : {8'b0, write_data}) : 16'bz; // modo 
 	assign data = (!output_en && !wEn) ? ((address[0] == 1) ? dram_dq[15:8] : dram_dq[7:0]) : 8'bz;
-	
+	assign ready = (state == S_READY) && (next_state == S_READY) && (delay_ctr == 0) && (!need_refresh);
 	//sinais fixos
 	assign dram_cke = 1'b1;
 	assign {dram_cs_n, dram_ras_n, dram_cas_n, dram_we_n} = dram_cmd;
@@ -83,7 +83,6 @@ module dram_controller (
 		next_state = state;
 		next_delay_ctr = delay_ctr;
 		dram_cmd = CMD_NOP;
-		ready = 1'b0;
 		output_en = 1'b0;
 		dram_addr = 13'b0;
 		dram_ba = 2'b0;
@@ -116,11 +115,12 @@ module dram_controller (
 				S_INIT_REFS: begin
 					dram_cmd = CMD_REF;
 					next_delay_ctr = TRC;
-					if (init_ref_ctr == 0)
+					if (init_ref_ctr == 0) begin
 						next_state = S_INIT_MRS;
-					else
+					end 	else begin
 						init_ref_ctr = init_ref_ctr - 1;
 						next_state = S_INIT_REFS;
+					end
 					
 				end
 				
@@ -132,12 +132,10 @@ module dram_controller (
 				end
 				
 				S_READY: begin
-					ready = 1'b1;
 					if(need_refresh) begin
 						next_delay_ctr = TRP;
 						next_state = S_REF;
 					end else if (req) begin
-						ready = 1'b0;
 						next_state = S_ACT;
 					end
 				end
