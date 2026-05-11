@@ -1,24 +1,22 @@
 module dram_iface (
     input  wire        clk,
-    input  wire        rst,       // Reset limpo vindo do top_level
-    input  wire [9:0]  SW,        // Chaves da placa
-    input  wire [3:0]  KEY,       // Botões
+    input  wire        rst,       
+    input  wire [9:0]  SW,       
+    input  wire [3:0]  KEY,       
     
-    input  wire        ready,     // Status do controlador
-    inout  wire [7:0]  data,      // Barramento bidirecional de dados
-    output wire        req,       // Pedido de operação
+    input  wire        ready,    
+    inout  wire [7:0]  data,      
+    output wire        req,       
     output wire        wEn,       // 1 = Write, 0 = Read
     output wire [25:0] address,   // Endereço para a memória
     
-    output wire [6:0]  HEX0,      // Displays de 7 Segmentos
+    output wire [6:0]  HEX0,      
     output wire [6:0]  HEX1,
     output wire [6:0]  HEX4,
     output wire [6:0]  HEX5
 );
 
-    // =========================================================================
-    // PARÂMETROS DOS ESTADOS
-    // =========================================================================
+
     parameter S_IDLE         = 3'd0;
     parameter S_REQ_RD       = 3'd1;
     parameter S_WAIT_RD      = 3'd2;
@@ -27,44 +25,33 @@ module dram_iface (
     parameter S_AUTO_REQ_RD  = 3'd5;
     parameter S_AUTO_WAIT_RD = 3'd6;
 
-    // =========================================================================
-    // REGISTRADORES INTERNOS
-    // =========================================================================
+
     reg [2:0] state;
-    reg       req_reg;
-    reg       wEn_reg;
-    reg       data_dir;       // 1 = Interface conduz o dado, 0 = High-Z (Controlador conduz)
+    reg req_reg;
+    reg wEn_reg;
+    reg data_dir;       // 1 = Interface conduz o dado, 0 = High-Z (Controlador conduz)
     reg [7:0] data_out_reg;   // O que vamos escrever
     reg [7:0] display_data;   // O que lemos da memória
     reg [25:0] last_sw_addr;   // Memória do último endereço
 
-    // Sincronizadores para o botão KEY[3] (Antitrepidacao / Debounce)
     reg k3_now, k3_last;
 
-    // =========================================================================
-    // DETETORES DE EVENTOS (COMBINACIONAIS)
-    // =========================================================================
-    // KEY[3] é ativo em LOW. A escrita dispara na borda de descida (quando aperta)
+    // KEY[3] é ativo em LOW. A escrita dispara na borda de descida
     wire write_trigger = (k3_last == 1'b1 && k3_now == 1'b0);
     
-    // O endereço mudou se as chaves SW[9:4] estiverem diferentes do último valor gravado
+    // O endereço mudou se SW[9:4] é diff do último valor gravado
     reg addr_changed;
 
-    // =========================================================================
-    // ATRIBUIÇÕES CONTÍNUAS (ASSIGNS)
-    // =========================================================================
+
     assign req = req_reg;
     assign wEn = wEn_reg;
     
     // Concatena o endereço selecionado com zeros para formar os 26 bits
     assign address = {SW[9], 1'b0, SW[8:6], 19'b0, SW[5:4]};
 
-    // Controle inteligente do barramento tristate
     assign data = data_dir ? data_out_reg : 8'bz;
 
-    // =========================================================================
-    // MÁQUINA DE ESTADOS PRINCIPAL (SÍNCRONA)
-    // =========================================================================
+    
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             state        <= S_IDLE;
@@ -79,7 +66,7 @@ module dram_iface (
             k3_last      <= 1'b1;
         end else begin
             
-            // 1. Atualiza o filtro do botão
+            // atualiza o filtro do botão
             k3_now <= KEY[3];
             k3_last  <= k3_now;
 				
@@ -89,10 +76,9 @@ module dram_iface (
 					addr_changed <= 0;
 				end
 
-            // 2. Transições de Estado
+
             case (state)
                 
-                // --- OCIOSO E VIGILANTE ---
                 S_IDLE: begin
                     req_reg  <= 1'b0;
                     data_dir <= 1'b0; // Libera o barramento
@@ -116,7 +102,6 @@ module dram_iface (
 						  end
                 end
 
-                // --- FLUXO DE LEITURA ---
                 S_REQ_RD: begin
                     if (!ready) begin 
                         // Controlador reconheceu e baixou o ready
@@ -128,14 +113,12 @@ module dram_iface (
                 S_WAIT_RD: begin
                     if (ready) begin 
                         // Controlador terminou e devolveu o ready alto
-                        display_data <= data; // Bate a foto do dado lido
+                        display_data <= data; // armazena o dado lido
                         state        <= S_IDLE;
                     end
                 end
 
-                // --- FLUXO DE ESCRITA ---
                 S_REQ_WR: begin
-                    // Mantém a direção do dado firme!
                     wEn_reg  <= 1'b1;
                     data_dir <= 1'b1;
                     
@@ -147,7 +130,7 @@ module dram_iface (
 
                 S_WAIT_WR: begin
                     if (ready) begin 
-                        // Escrita finalizada! Dispara uma leitura automática
+                        // Terminou a escrita e faz uma leitura automática
                         state    <= S_REQ_RD;
                         req_reg  <= 1'b1;
                         wEn_reg  <= 1'b0;
@@ -155,7 +138,7 @@ module dram_iface (
                     end
                 end
 
-                // --- FLUXO DE LEITURA AUTOMÁTICA (Após Escrita) ---
+
                 S_AUTO_REQ_RD: begin
                     if (!ready) begin
                         state   <= S_AUTO_WAIT_RD;
@@ -170,20 +153,17 @@ module dram_iface (
                     end
                 end
 
-                // Rota de Fuga
+
                 default: state <= S_IDLE;
             endcase
         end
     end
 
-    // =========================================================================
-    // INSTANCIAÇÃO DOS DECODIFICADORES 7-SEGMENTOS
-    // =========================================================================
     // Exibe o dado lido em Hexadecimal nos displays 0 e 1
     bin2hex dec0 (.BIN(SW[3:0]), .HEX(HEX0));
     bin2hex dec1 (.BIN(display_data[3:0]), .HEX(HEX1));
     
-    // Exibe os 6 bits de endereço (SW[9:4]) nos displays 4 e 5
+    // Exibe os bits de endereço (SW[9:4]) nos displays 4 e 5
     bin2hex dec4 (.BIN({last_sw_addr[22:21], last_sw_addr[1:0]}),     .HEX(HEX4));
     bin2hex dec5 (.BIN({2'b00, last_sw_addr[25], last_sw_addr[23]}), .HEX(HEX5));
 
