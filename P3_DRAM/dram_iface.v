@@ -39,15 +39,16 @@ assign teste = state;
     reg [7:0] data_out_reg;   // O que vamos escrever
     reg [7:0] display_data;   // O que lemos da memória
     reg [25:0] last_sw_addr;   // Memória do último endereço
+	 reg ready_reg;
 
     // Sincronizadores para o botão KEY[3] (Antitrepidacao / Debounce)
-    reg k3_sync1, k3_sync2, k3_last;
+    reg k3_now, k3_last;
 
     // =========================================================================
     // DETETORES DE EVENTOS (COMBINACIONAIS)
     // =========================================================================
     // KEY[3] é ativo em LOW. A escrita dispara na borda de descida (quando aperta)
-    wire write_trigger = (k3_last == 1'b1 && k3_sync2 == 1'b0);
+    wire write_trigger = (k3_last == 1'b1 && k3_now == 1'b0);
     
     // O endereço mudou se as chaves SW[9:4] estiverem diferentes do último valor gravado
     wire addr_changed = (address != last_sw_addr);
@@ -76,16 +77,15 @@ assign teste = state;
             data_out_reg <= 8'b0;
             display_data <= 8'b0;
             last_sw_addr <= address; // Inicia sincronizado com as chaves
-            
-            k3_sync1     <= 1'b1;
-            k3_sync2     <= 1'b1;
+            ready_reg <= 1'b0;
+            k3_now     <= 1'b1;
             k3_last      <= 1'b1;
         end else begin
             
             // 1. Atualiza o filtro do botão
-            k3_sync1 <= KEY[3];
-            k3_sync2 <= k3_sync1;
-            k3_last  <= k3_sync2;
+            k3_now <= KEY[3];
+            k3_last  <= k3_now;
+				ready_reg <= ready;
 
             // 2. Transições de Estado
             case (state)
@@ -95,7 +95,7 @@ assign teste = state;
                     req_reg  <= 1'b0;
                     data_dir <= 1'b0; // Libera o barramento
                     
-                    if (write_trigger && ready) begin
+                    if (write_trigger && ready_reg) begin
                         state        <= S_REQ_WR;
                         req_reg      <= 1'b1;
                         wEn_reg      <= 1'b1;
@@ -103,7 +103,7 @@ assign teste = state;
                         data_out_reg <= {4'h0, SW[3:0]}; // Carrega o dado
                         last_sw_addr <= address; // Memoriza onde vai escrever
                     
-                    end else if (addr_changed && ready) begin
+                    end else if (addr_changed && ready_reg) begin
                         state        <= S_REQ_RD;
                         req_reg      <= 1'b1;
                         wEn_reg      <= 1'b0;
@@ -144,7 +144,7 @@ assign teste = state;
                 S_WAIT_WR: begin
                     if (ready) begin 
                         // Escrita finalizada! Dispara uma leitura automática
-                        state    <= S_AUTO_REQ_RD;
+                        state    <= S_REQ_RD;
                         req_reg  <= 1'b1;
                         wEn_reg  <= 1'b0;
                         data_dir <= 1'b0; // Solta o barramento para poder ler

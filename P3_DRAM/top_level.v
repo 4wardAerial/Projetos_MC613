@@ -53,7 +53,7 @@ dram_iface interface(
 	.address(address),
 	.req(req),
 	.wEn(wEn),
-	.teste(LEDR[9:6])
+	.teste(LEDR[9:7])
 );
 
 dram_controller controller(

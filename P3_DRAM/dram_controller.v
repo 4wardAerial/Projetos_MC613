@@ -7,7 +7,7 @@ module dram_controller (
     input  wire        req,       // Pedido de operação
     input  wire        wEn,       // 1 = Write, 0 = Read
     
-    output wire        ready,     // 1 = Controlador livre
+    output reg        ready,     // 1 = Controlador livre
     inout  wire [15:0] dram_dq,   // Pinos físicos de dados da SDRAM
     output reg  [12:0] dram_addr, // Pinos físicos de endereço da SDRAM
     output reg  [1:0]  dram_ba,   // Pinos físicos de Bank Address
@@ -68,7 +68,6 @@ module dram_controller (
     // LÓGICA COMBINACIONAL DE I/O (Assigns)
     // =========================================================================
     // Sinaliza à interface que estamos prontos para trabalhar
-    assign ready = (state == S_READY) && (delay_ctr == 0) && (!need_refresh);
     
     // Liga o estado aos LEDs
     assign teste = state;
@@ -103,6 +102,7 @@ module dram_controller (
             dram_addr     <= 13'b0;
             dram_ba       <= 2'b0;
             output_en     <= 1'b0;
+				ready         <= 1'b0;
         end else begin
             
             // 1. Contador de Auto-Refresh (Roda em background o tempo todo)
@@ -169,10 +169,13 @@ module dram_controller (
                     
                     // --- OCIOSO (Aguardando Ordens) ---
                     S_READY: begin
+								ready <= 1'b1;
                         if (need_refresh) begin
                             state <= S_REF;
+									 ready<= 1'b1;
                         end else if (req) begin
                             state       <= S_ACT;
+									 ready <= 1'b0;
                             is_write_op <= wEn; // Tira a foto de qual é a operação
                         end
                     end
@@ -212,7 +215,7 @@ module dram_controller (
                         dram_addr[9:0]<= address[10:1]; // Column Address
                         dram_addr[10] <= 1'b0;          // Sem Auto-Precharge
                         
-                        delay_ctr <= TCAS + 1; // CL = 3 + 1 para o tempo de viagem do elétron
+                        delay_ctr <= TCAS; // CL = 3 + 1 para o tempo de viagem do elétron
                         state     <= S_CAPT;
                     end
                     
