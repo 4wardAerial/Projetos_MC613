@@ -30,7 +30,7 @@ wire req;
 wire wEn;
 wire clk_controller;
 
-wire 	rst_raw = ~KEY[1];
+wire 	rst_raw = ~KEY[0];
 reg rst;
 always @(posedge clk_controller) begin
 	rst <= rst_raw;
@@ -84,7 +84,7 @@ my_pll pll(
 	.refclk(CLOCK_50),
 	.rst(1'b0),
 	.outclk_0(clk_controller),
-	.outclk_1(DRAM_CLK)
+	.outclk_1(DRAM_CLK) // clock shiftado em 3ns
 );
 
 endmodule

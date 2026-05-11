@@ -38,7 +38,7 @@ assign teste = state;
     reg       data_dir;       // 1 = Interface conduz o dado, 0 = High-Z (Controlador conduz)
     reg [7:0] data_out_reg;   // O que vamos escrever
     reg [7:0] display_data;   // O que lemos da memória
-    reg [5:0] last_sw_addr;   // Memória do último endereço
+    reg [25:0] last_sw_addr;   // Memória do último endereço
 
     // Sincronizadores para o botão KEY[3] (Antitrepidacao / Debounce)
     reg k3_sync1, k3_sync2, k3_last;
@@ -50,7 +50,7 @@ assign teste = state;
     wire write_trigger = (k3_last == 1'b1 && k3_sync2 == 1'b0);
     
     // O endereço mudou se as chaves SW[9:4] estiverem diferentes do último valor gravado
-    wire addr_changed = (SW[9:4] != last_sw_addr);
+    wire addr_changed = (address != last_sw_addr);
 
     // =========================================================================
     // ATRIBUIÇÕES CONTÍNUAS (ASSIGNS)
@@ -59,7 +59,7 @@ assign teste = state;
     assign wEn = wEn_reg;
     
     // Concatena o endereço selecionado com zeros para formar os 26 bits
-    assign address = {20'd0, last_sw_addr};
+    assign address = {SW[9], 1'b0, SW[8:6], 19'b0, SW[5:4]};
 
     // Controle inteligente do barramento tristate
     assign data = data_dir ? data_out_reg : 8'bz;
@@ -75,7 +75,7 @@ assign teste = state;
             data_dir     <= 1'b0;
             data_out_reg <= 8'b0;
             display_data <= 8'b0;
-            last_sw_addr <= SW[9:4]; // Inicia sincronizado com as chaves
+            last_sw_addr <= address; // Inicia sincronizado com as chaves
             
             k3_sync1     <= 1'b1;
             k3_sync2     <= 1'b1;
@@ -101,14 +101,14 @@ assign teste = state;
                         wEn_reg      <= 1'b1;
                         data_dir     <= 1'b1; // Toma posse do barramento
                         data_out_reg <= {4'h0, SW[3:0]}; // Carrega o dado
-                        last_sw_addr <= SW[9:4]; // Memoriza onde vai escrever
+                        last_sw_addr <= address; // Memoriza onde vai escrever
                     
                     end else if (addr_changed && ready) begin
                         state        <= S_REQ_RD;
                         req_reg      <= 1'b1;
                         wEn_reg      <= 1'b0;
                         data_dir     <= 1'b0;
-                        last_sw_addr <= SW[9:4]; // Memoriza o novo endereço
+                        last_sw_addr <= address; // Memoriza o novo endereço
                     end
                 end
 
@@ -177,10 +177,10 @@ assign teste = state;
     // =========================================================================
     // Exibe o dado lido em Hexadecimal nos displays 0 e 1
     bin2hex dec0 (.BIN(SW[3:0]), .HEX(HEX0));
-    bin2hex dec1 (.BIN(display_data[7:4]), .HEX(HEX1));
+    bin2hex dec1 (.BIN(display_data[3:0]), .HEX(HEX1));
     
     // Exibe os 6 bits de endereço (SW[9:4]) nos displays 4 e 5
-    bin2hex dec4 (.BIN(last_sw_addr[3:0]),     .HEX(HEX4));
-    bin2hex dec5 (.BIN({2'b00, last_sw_addr[5:4]}), .HEX(HEX5));
+    bin2hex dec4 (.BIN({last_sw_addr[22:21], last_sw_addr[1:0]}),     .HEX(HEX4));
+    bin2hex dec5 (.BIN({2'b00, last_sw_addr[25], last_sw_addr[23]}), .HEX(HEX5));
 
 endmodule
