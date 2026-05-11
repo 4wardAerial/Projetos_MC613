@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module tb_dram_iface();
+module dram_iface_tb();
 
     reg clk;
     reg rst;
@@ -16,8 +16,6 @@ module tb_dram_iface();
     
     wire [6:0] HEX0, HEX1, HEX4, HEX5;
 
-    wire [2:0] teste;
-
    
     dram_iface uut (
         .clk(clk),
@@ -32,8 +30,7 @@ module tb_dram_iface();
         .HEX0(HEX0),
         .HEX1(HEX1),
         .HEX4(HEX4),
-        .HEX5(HEX5),
-        .teste(teste)
+        .HEX5(HEX5)
     );
 
    
@@ -118,7 +115,6 @@ module tb_dram_iface();
         
         #100;
 
-        -
         // Teste 2: Escrever dados e observar a leitura automática 
         $display("[%0t] Teste 2: Escrevendo o dado 0x0C.", $time);
         SW[3:0] = 4'hC; // Colocar o C em hexadecimal
