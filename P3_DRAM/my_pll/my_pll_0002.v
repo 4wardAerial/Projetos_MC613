@@ -26,7 +26,7 @@ module  my_pll_0002(
 		.phase_shift0("0 ps"),
 		.duty_cycle0(50),
 		.output_clock_frequency1("143.000000 MHz"),
-		.phase_shift1("-2360 ps"),
+		.phase_shift1("2972 ps"),
 		.duty_cycle1(50),
 		.output_clock_frequency2("0 MHz"),
 		.phase_shift2("0 ps"),

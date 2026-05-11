@@ -35,6 +35,7 @@ module dram_iface (
     reg [25:0] last_sw_addr;   // Memória do último endereço
 
     reg k3_now, k3_last;
+	 reg initial_read; // faz com que leia amem´oria apos um reset
 
     // KEY[3] é ativo em LOW. A escrita dispara na borda de descida
     wire write_trigger = (k3_last == 1'b1 && k3_now == 1'b0);
@@ -55,6 +56,7 @@ module dram_iface (
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             state        <= S_IDLE;
+				initial_read <= 1'b1;
             req_reg      <= 1'b0;
             wEn_reg      <= 1'b0;
             data_dir     <= 1'b0;
@@ -91,7 +93,7 @@ module dram_iface (
                         data_out_reg <= {4'h0, SW[3:0]}; // Carrega o dado
                         last_sw_addr <= address; // Memoriza onde vai escrever
                     
-                    end else if (addr_changed && ready) begin
+                    end else if ((addr_changed||initial_read) && ready) begin
                         state        <= S_REQ_RD;
                         req_reg      <= 1'b1;
                         wEn_reg      <= 1'b0;
@@ -103,6 +105,7 @@ module dram_iface (
                 end
 
                 S_REQ_RD: begin
+							initial_read <= 1'b0;
                     if (!ready) begin 
                         // Controlador reconheceu e baixou o ready
                         state   <= S_WAIT_RD;
