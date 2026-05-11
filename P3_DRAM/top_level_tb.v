@@ -20,7 +20,6 @@ module top_level_tb;
     wire        DRAM_RAS_N;
     wire        DRAM_CS_N;
     wire [6:0]  HEX0, HEX1, HEX4, HEX5;
-    wire [9:0]  LEDR;
 
     // --- Instância do Módulo Top Level ---
     top_level uut (
@@ -38,8 +37,7 @@ module top_level_tb;
         .DRAM_CAS_N(DRAM_CAS_N),
         .DRAM_RAS_N(DRAM_RAS_N),
         .DRAM_CS_N(DRAM_CS_N),
-        .HEX0(HEX0), .HEX1(HEX1), .HEX4(HEX4), .HEX5(HEX5),
-        .LEDR(LEDR)
+        .HEX0(HEX0), .HEX1(HEX1), .HEX4(HEX4), .HEX5(HEX5)
     );
 
     // --- Geração do Clock (50 MHz = Período de 20ns) ---
@@ -66,7 +64,6 @@ module top_level_tb;
         // 2. Aguardar a inicialização da SDRAM (S_INIT_WAIT + S_INIT_REFS + S_INIT_MRS)
         // No seu código, INIT_DELAY é 30.000 ciclos. Na simulação, isso demora.
         $display("--- Aguardando Inicialização do Controlador ---");
-        wait(LEDR[5:0] == 6'd4); // Espera o estado chegar em S_READY (valor 4)
         $display("--- Controlador Pronto! ---");
 
         // 3. Preparar uma Escrita
@@ -80,7 +77,6 @@ module top_level_tb;
         KEY[3] = 1; // Solta o botão
 
         // 4. Aguardar o ciclo de escrita terminar
-        wait(LEDR[5:0] == 6'd4);
         $display("--- Escrita e Leitura Automática Finalizadas ---");
 
         #1000;
@@ -89,8 +85,8 @@ module top_level_tb;
 
     // Monitor de Estados para Debug no Console
     initial begin
-        $monitor("Tempo: %0t | Estado Controller: %d | Estado Interface: %d | DQ: %h", 
-                 $time, LEDR[5:0], uut.interface.state, DRAM_DQ);
+        $monitor("Tempo: %0t | Estado Controller: %d | DQ: %h", 
+                 $time, uut.interface.state, DRAM_DQ);
     end
 
 endmodule
