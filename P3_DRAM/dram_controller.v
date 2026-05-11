@@ -63,13 +63,7 @@ module dram_controller (
 
     // fala pra interface que estamos prontos
     assign ready = (state == S_READY) && (delay_ctr == 0) && (!need_refresh);
-<<<<<<< HEAD
     
-    // liga o estado aos LEDs
-    assign teste = state;
-=======
->>>>>>> bb41f9e940a0d48be1004d6326bf8772168b1c05
-
     // Pinos fixos da SDRAM
     assign dram_cke = 1'b1;
     assign {dram_cs_n, dram_ras_n, dram_cas_n, dram_we_n} = dram_cmd;
