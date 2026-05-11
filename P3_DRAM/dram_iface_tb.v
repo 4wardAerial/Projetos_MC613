@@ -2,27 +2,23 @@
 
 module tb_dram_iface();
 
-    // Sinais base
     reg clk;
     reg rst;
     
-    // Entradas do Utilizador
     reg [9:0] SW;
     reg [3:0] KEY;
     
-    // Ligações entre a Interface e o "Controlador Falso"
-    wire        ready;
-    wire        req;
-    wire        wEn;
+    wire ready;
+    wire req; //req é o pedido da operação
+    wire wEn;
     wire [25:0] address;
-    wire [7:0]  data;
+    wire [7:0] data;
     
-    // Saídas visuais
     wire [6:0] HEX0, HEX1, HEX4, HEX5;
 
-    // =========================================================================
-    // INSTANCIAÇÃO DO MÓDULO A TESTAR (DUT)
-    // =========================================================================
+    wire [2:0] teste;
+
+   
     dram_iface uut (
         .clk(clk),
         .rst(rst),
@@ -36,27 +32,25 @@ module tb_dram_iface();
         .HEX0(HEX0),
         .HEX1(HEX1),
         .HEX4(HEX4),
-        .HEX5(HEX5)
+        .HEX5(HEX5),
+        .teste(teste)
     );
 
-    // =========================================================================
-    // GERAÇÃO DE CLOCK (50 MHz -> Período de 20 ns)
-    // =========================================================================
+   
+    // Vamos criar um clock de 50 MZ
     initial begin
         clk = 0;
         forever #10 clk = ~clk; 
     end
 
-    // =========================================================================
-    // EMULADOR DO CONTROLADOR DRAM (Mock Controller c/ Handshake 4 Fases)
-    // =========================================================================
-    reg       mock_ready;
+    
+    reg mock_ready;
     reg [7:0] mock_data_out;
-    reg       mock_data_en;
+    reg mock_data_en;
     reg [2:0] m_state;
 
     assign ready = mock_ready;
-    // O Testbench só injeta dados na leitura. No resto do tempo fica em High-Z
+    // só injeta dados na leitura.
     assign data = mock_data_en ? mock_data_out : 8'bz;
 
     always @(posedge clk) begin
@@ -66,31 +60,30 @@ module tb_dram_iface();
             m_state      <= 0;
         end else begin
             case (m_state)
-                0: begin // IDLE: Controlador livre
+                0: begin // caso do IDLE
                     mock_ready   <= 1'b1;
                     mock_data_en <= 1'b0;
-                    if (req) m_state <= 1; // Recebeu um pedido da interface!
+                    if (req) m_state <= 1; // se temos um pedido, vamos para o próximo estado
                 end
                 
-                1: begin // ACK: Baixa o ready para "Estou a trabalhar"
+                1: begin // caso que vamos processar o req
                     mock_ready <= 1'b0; 
-                    if (!req) m_state <= 2; // Espera a interface baixar o req
+                    if (!req) m_state <= 2; 
                 end
                 
-                2: begin // PROCESSA: Finge que vai à memória
-                    repeat(5) @(posedge clk); // Simula atraso da SDRAM
+                2: begin // vamos para a memória
+                    repeat(5) @(posedge clk); // um atraso pequeno(pra pudermos simular)
                     
-                    if (!wEn) begin
-                        // Se for LEITURA, injeta um dado falso dependente do endereço
+                    if (!wEn) begin // Se é leitura, vamos pegar e colocar um dado que depende do endereço 
                         mock_data_en  <= 1'b1;
-                        mock_data_out <= address[7:0] + 8'hA0; // Ex: Endereço 2 -> Dado A2
+                        mock_data_out <= address[7:0] + 8'hA0; // Ex: Endereço 2 + A0 = A2
                     end
                     
-                    mock_ready <= 1'b1; // Sobe o ready: "Terminei!"
+                    mock_ready <= 1'b1; // Fazer que o ready seja 1 para simbolizar o fim
                     m_state    <= 3;
                 end
                 
-                3: begin // CLEANUP: Desliga o barramento no ciclo seguinte
+                3: begin // reinicia o ciclo para o ready
                     mock_data_en <= 1'b0;
                     m_state      <= 0;
                 end
@@ -98,61 +91,57 @@ module tb_dram_iface();
         end
     end
 
-    // =========================================================================
-    // ESTÍMULOS DO UTILIZADOR (Testes Reais)
-    // =========================================================================
+    // Alguns testes reais.
     initial begin
-        // 1. Inicialização segura
+        // Inicialização
         rst = 1;
         SW = 10'b0;
         KEY = 4'b1111; // Botão não pressionado
         #50 rst = 0;
         
-        $display("\n[%0t] Sistema Inicializado.", $time);
+        
         #100;
 
-        // ---------------------------------------------------------------------
-        // TESTE 1: Mudar o endereço no SW para forçar Leitura Automática
-        // ---------------------------------------------------------------------
-        $display("[%0t] TESTE 1: Alterando SW[9:4] para endereco 0x05.", $time);
-        SW[9:4] = 6'h05; // Vai causar a mudança
+
+        // TESTE 1: Mudar o endereço no SW para a leitura
+        $display("[%0t] Teste 1: Alterando SW[9:4] para endereco 0x05.", $time);
+        SW[9:4] = 6'h05; 
         
-        // Espera todo o ciclo do Handshake
+        // Espera todo o ciclo de handshake
         wait (req == 1'b1);
-        $display("[%0t]   -> Interface pediu LEITURA", $time);
+        $display("[%0t] Interface pediu LEITURA", $time);
         
         wait (ready == 1'b1 && req == 1'b0); // Espera a leitura terminar
         
-        @(posedge clk); // +1 ciclo para o dado aparecer no display
-        $display("[%0t] TESTE 1 Concluido! (Mock deve ter retornado A5)\n", $time);
+        @(posedge clk); // +1 ciclo para esperar o dado aparecer no display
+        $display("[%0t] Teste 1 terminado e o Mock retornou para A5\n", $time);
         
         #100;
 
-        // ---------------------------------------------------------------------
-        // TESTE 2: Escrever dados e observar o Auto-Read de confirmação
-        // ---------------------------------------------------------------------
-        $display("[%0t] TESTE 2: Escrevendo o dado 0x0C.", $time);
-        SW[3:0] = 4'hC; // Configura o dado
+        -
+        // Teste 2: Escrever dados e observar a leitura automática 
+        $display("[%0t] Teste 2: Escrevendo o dado 0x0C.", $time);
+        SW[3:0] = 4'hC; // Colocar o C em hexadecimal
         #20;
         
-        // Aperta e solta o botão (Mantém por alguns ciclos para o Debouncer ver)
+        // Aperta e solta o botão de escrita
         KEY[3] = 1'b0; 
-        #60; // 3 ciclos de relógio
+        #60; 
         KEY[3] = 1'b1;
         
-        // A) Espera o ciclo de ESCRITA
+        // Ciclo de escrita
         wait (req == 1'b1 && wEn == 1'b1);
-        $display("[%0t]   -> Interface pediu ESCRITA. Dado no barramento: %h", $time, data);
+        $display("[%0t] Interface pediu escrita. Dado : %h", $time, data);
         wait (ready == 1'b1 && req == 1'b0);
-        $display("[%0t]   -> ESCRITA Terminada.", $time);
+        $display("[%0t] Escrita terminada.", $time);
         
-        // B) Espera o ciclo de LEITURA AUTOMÁTICA
+        // Ciclo de leitura automática
         wait (req == 1'b1 && wEn == 1'b0);
-        $display("[%0t]   -> Interface disparou o AUTO-READ.", $time);
+        $display("[%0t] Interface fez a leitura automática", $time);
         wait (ready == 1'b1 && req == 1'b0);
         
         @(posedge clk);
-        $display("[%0t] TESTE 2 Concluido com sucesso!\n", $time);
+
 
         #100 $stop;
     end
