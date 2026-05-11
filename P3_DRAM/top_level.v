@@ -19,8 +19,7 @@ module top_level (
 	output wire [6:0] HEX0,
 	output wire [6:0] HEX1,
 	output wire [6:0] HEX4,
-	output wire [6:0] HEX5,
-	output wire [9:0] LEDR
+	output wire [6:0] HEX5
 );
 
 wire ready;
@@ -52,8 +51,7 @@ dram_iface interface(
 	
 	.address(address),
 	.req(req),
-	.wEn(wEn),
-	.teste(LEDR[9:7])
+	.wEn(wEn)
 );
 
 dram_controller controller(
@@ -76,8 +74,7 @@ dram_controller controller(
 	.dram_we_n(DRAM_WE_N),
 	.dram_cas_n(DRAM_CAS_N),
 	.dram_ras_n(DRAM_RAS_N),
-	.dram_cs_n(DRAM_CS_N),
-	.teste(LEDR[5:0])
+	.dram_cs_n(DRAM_CS_N)
 );
 
 my_pll pll(
